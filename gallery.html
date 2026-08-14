@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - UPGS Punukkannoor 100th Centenary Celebration</title>
+  <meta name="description" content="Browse photos and videos of UPGS Punukkannoor school celebrations, arts, sports, centenary events, and campus life.">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-social-links">
+        <a href="#" class="top-social-icon" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/upgschoolpunukkonnoor" class="top-social-icon" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/919447135592" class="top-social-icon" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="top-social-icon" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="top-bar-actions">
+        <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
+        <button class="lang-switch-btn" onclick="toggleLanguage()">
+          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <div class="brand-text">
+          <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
+          <p data-i18n="school_tagline">Upper Primary Government School</p>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <ul class="nav-links-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-item-link" data-i18n="nav_home">Home</a></li>
+        
+        <li class="nav-item-dropdown">
+          <a href="about.html" class="nav-item-link">
+            <span data-i18n="nav_about">About Us</span> <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 2px;"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html" class="dropdown-item" data-i18n="nav_about_school"><i class="fas fa-university" style="color: var(--accent-blue);"></i> About School</a></li>
+            <li><a href="staff.html" class="dropdown-item" data-i18n="nav_staff"><i class="fas fa-chalkboard-teacher" style="color: var(--accent-coral);"></i> Staff Directory</a></li>
+            <li><a href="about.html#curriculum" class="dropdown-item" data-i18n="nav_curriculum"><i class="fas fa-book-open" style="color: #d97706;"></i> Curriculum</a></li>
+          </ul>
+        </li>
+
+        <li><a href="virtual-tour.html" class="nav-item-link" data-i18n="nav_tour">360° Tour</a></li>
+        <li><a href="gallery.html" class="nav-item-link active" data-i18n="nav_gallery">Gallery</a></li>
+        <li><a href="contact.html" class="nav-item-link" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="alumni.html" class="nav-cta-btn" data-i18n="nav_register_btn">Join Alumni</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 5rem 0 4.5rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral);">
+    <div class="container">
+      <span class="marquee-badge" style="background: var(--accent-coral); color: #ffffff; padding: 0.4rem 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+        <i class="fas fa-camera"></i> <span>CAMPUS MEMORIES & EVENTS</span>
+      </span>
+      <h1 style="font-size: 3rem; font-weight: 800; color: #ffffff; margin-bottom: 1rem;">School Photo & Video Gallery</h1>
+      <p style="color: #cbd5e1; font-size: 1.2rem; max-width: 750px; margin: 0 auto;">Capturing moments of glory, cultural celebrations, sports meets, and centenary festivities.</p>
+    </div>
+  </section>
+
+  <!-- Gallery Grid Section -->
+  <section style="padding: 4rem 0; background-color: #f8fafc;">
+    <div class="container">
+      
+      <!-- Filter Buttons -->
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;">
+        <button class="btn btn-primary gallery-filter-btn active" data-filter="all" onclick="filterGallery('all', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
+          All Photos (24)
+        </button>
+        <button class="btn btn-outline gallery-filter-btn" data-filter="campus" onclick="filterGallery('campus', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
+          Campus & Infrastructure
+        </button>
+        <button class="btn btn-outline gallery-filter-btn" data-filter="events" onclick="filterGallery('events', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
+          Events & Celebrations
+        </button>
+        <button class="btn btn-outline gallery-filter-btn" data-filter="activities" onclick="filterGallery('activities', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
+          Student Activities & Sports
+        </button>
+      </div>
+
+      <!-- 24 Photo Grid -->
+      <div class="grid-3" id="galleryGrid">
+        
+        <!-- Photo 1 -->
+        <div class="gallery-card gallery-item campus" onclick="openLightbox('images/gallery/7aa8e45c-8089-4b8e-8137-6e6a4fca1089.jpg', 'UPGS Punukkannoor Main Campus Building')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/7aa8e45c-8089-4b8e-8137-6e6a4fca1089.jpg" alt="Main Campus Building" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Campus View</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Main School Building</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Centenary school campus at Punukkannoor.</p>
+          </div>
+        </div>
+
+        <!-- Photo 2 -->
+        <div class="gallery-card gallery-item events" onclick="openLightbox('images/gallery/262eebd7-708e-4416-add7-6fe9ef79ddfb.jpg', 'Centenary Jubilee Celebration')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/262eebd7-708e-4416-add7-6fe9ef79ddfb.jpg" alt="Centenary Jubilee Celebration" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-hm" style="margin-bottom: 0.5rem;">Centenary Event</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">100th Jubilee Function</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Dignitaries, teachers & community leaders.</p>
+          </div>
+        </div>
+
+        <!-- Photo 3 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/5d1f41d6-82a2-4bab-8450-be665e5611bf.jpg', 'School Sports & Athletics Meet')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/5d1f41d6-82a2-4bab-8450-be665e5611bf.jpg" alt="School Sports Meet" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lpst" style="margin-bottom: 0.5rem;">Sports & Fitness</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Annual Sports Meet</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Athletics, games & student spirit.</p>
+          </div>
+        </div>
+
+        <!-- Photo 4 -->
+        <div class="gallery-card gallery-item events" onclick="openLightbox('images/gallery/296f720d-c3f7-43dc-b1f3-f5cc8224de41.jpg', 'Cultural Kalotsavam Performance')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/296f720d-c3f7-43dc-b1f3-f5cc8224de41.jpg" alt="Cultural Performance" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lang" style="margin-bottom: 0.5rem;">Arts & Kalotsavam</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Cultural Kalotsavam</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Traditional art & dance performances.</p>
+          </div>
+        </div>
+
+        <!-- Photo 5 -->
+        <div class="gallery-card gallery-item campus" onclick="openLightbox('images/gallery/247dd7ee-2e16-46c5-8152-4da11020a3dd.jpg', 'Digital Smart Classrooms')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/247dd7ee-2e16-46c5-8152-4da11020a3dd.jpg" alt="Digital Smart Classrooms" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Infrastructure</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Hi-Tech Classrooms</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Interactive digital learning setup.</p>
+          </div>
+        </div>
+
+        <!-- Photo 6 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/7428fd03-3b3f-41e0-98a1-914958286029.jpg', 'Classroom Learning Session')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/7428fd03-3b3f-41e0-98a1-914958286029.jpg" alt="Classroom Learning Session" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lpst" style="margin-bottom: 0.5rem;">Academics</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Interactive Learning</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Students in active learning sessions.</p>
+          </div>
+        </div>
+
+        <!-- Photo 7 -->
+        <div class="gallery-card gallery-item events" onclick="openLightbox('images/gallery/74f076ed-4918-49a2-b208-efed780bd0b3.jpg', 'Centenary Pavilion Inauguration')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/74f076ed-4918-49a2-b208-efed780bd0b3.jpg" alt="Centenary Pavilion Inauguration" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-hm" style="margin-bottom: 0.5rem;">Celebration</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Centenary Celebrations</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Inaugural ceremony & public meeting.</p>
+          </div>
+        </div>
+
+        <!-- Photo 8 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/7223c85c-1921-47bc-8a6e-0d26f989de94.jpg', 'Pre-Primary Kids Activity')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/7223c85c-1921-47bc-8a6e-0d26f989de94.jpg" alt="Pre-Primary Kids Activity" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lpst" style="margin-bottom: 0.5rem;">Pre-Primary</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Pre-Primary Section</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Nurturing young minds in a playful environment.</p>
+          </div>
+        </div>
+
+        <!-- Photo 9 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/686cd4e3-ed14-46d8-b8de-0d14ce8b53e1.jpg', 'Student Science & Project Exhibition')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/686cd4e3-ed14-46d8-b8de-0d14ce8b53e1.jpg" alt="Science Exhibition" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Science Fair</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Science & Project Fair</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Innovative student models & experiments.</p>
+          </div>
+        </div>
+
+        <!-- Photo 10 -->
+        <div class="gallery-card gallery-item campus" onclick="openLightbox('images/gallery/0732a0c3-22e4-4c0f-9106-6ebf8bbb1827.jpg', 'School Campus & Courtyard')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/0732a0c3-22e4-4c0f-9106-6ebf8bbb1827.jpg" alt="School Campus" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Campus View</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Courtyard & Grounds</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Spacious environment for learning & games.</p>
+          </div>
+        </div>
+
+        <!-- Photo 11 -->
+        <div class="gallery-card gallery-item events" onclick="openLightbox('images/gallery/700f3f4d-77c1-48c7-a831-c184180a22b4.jpg', 'Special School Assembly & Gathering')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/700f3f4d-77c1-48c7-a831-c184180a22b4.jpg" alt="School Assembly" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-hm" style="margin-bottom: 0.5rem;">Assembly</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">School Assembly</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Morning assembly, pledge & prayers.</p>
+          </div>
+        </div>
+
+        <!-- Photo 12 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/1c431041-e9fe-40fa-9de3-978c4251775c.jpg', 'Student Group Learning')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/1c431041-e9fe-40fa-9de3-978c4251775c.jpg" alt="Student Group Learning" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lpst" style="margin-bottom: 0.5rem;">Activities</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Collaborative Projects</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Students working together on activities.</p>
+          </div>
+        </div>
+
+        <!-- Photo 13 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/646b670f-6f0c-4d42-bcb7-3c3473ae3f4a.jpg', 'Little Kites Computer Lab Session')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/646b670f-6f0c-4d42-bcb7-3c3473ae3f4a.jpg" alt="Little Kites Computer Lab" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Little Kites</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Computer & IT Lab</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Hands-on digital literacy training.</p>
+          </div>
+        </div>
+
+        <!-- Photo 14 -->
+        <div class="gallery-card gallery-item events" onclick="openLightbox('images/gallery/83886709-a657-4f4e-b5d4-0a07e04f2574.jpg', 'School Kalotsavam & Music Event')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/83886709-a657-4f4e-b5d4-0a07e04f2574.jpg" alt="School Music Event" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lang" style="margin-bottom: 0.5rem;">Music & Arts</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Music Competition</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Vocal & instrumental performances.</p>
+          </div>
+        </div>
+
+        <!-- Photo 15 -->
+        <div class="gallery-card gallery-item campus" onclick="openLightbox('images/gallery/974de54c-ede8-4ad9-b142-27257a763561.jpg', 'Digital Smart Board Installation')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/974de54c-ede8-4ad9-b142-27257a763561.jpg" alt="Digital Smart Board" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Infrastructure</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Interactive Smart Board</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Modern audio-visual teaching aids.</p>
+          </div>
+        </div>
+
+        <!-- Photo 16 -->
+        <div class="gallery-card gallery-item events" onclick="openLightbox('images/gallery/aa0894fa-f716-4ed5-ad68-682958dbf504.jpg', 'Teacher & Staff Meeting')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/aa0894fa-f716-4ed5-ad68-682958dbf504.jpg" alt="Faculty Gathering" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-hm" style="margin-bottom: 0.5rem;">Faculty</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Faculty Assembly</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Staff & leadership planning session.</p>
+          </div>
+        </div>
+
+        <!-- Photo 17 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/ae4d6def-a5ae-4233-b776-a2204991baeb.jpg', 'Little Kites IT Workshop')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/ae4d6def-a5ae-4233-b776-a2204991baeb.jpg" alt="IT Workshop" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">IT Club</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">IT & Coding Workshop</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Practical training in technology.</p>
+          </div>
+        </div>
+
+        <!-- Photo 18 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/b0085958-1198-479d-ad87-f6ad855ec3b7.jpg', 'Annual Sports Running Race')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/b0085958-1198-479d-ad87-f6ad855ec3b7.jpg" alt="Sports Race" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lpst" style="margin-bottom: 0.5rem;">Sports</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Track & Field Event</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Student athletics & track competitions.</p>
+          </div>
+        </div>
+
+        <!-- Photo 19 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/d3b55b87-8495-4dbf-9e34-a9584243491d.jpg', 'Eco Club Garden Drive')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/d3b55b87-8495-4dbf-9e34-a9584243491d.jpg" alt="Eco Club Planting" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lpst" style="margin-bottom: 0.5rem;">Eco Club</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Campus Greening Drive</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Tree planting & environmental awareness.</p>
+          </div>
+        </div>
+
+        <!-- Photo 20 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/daf95a0f-583d-4484-b6eb-0f7474c9166f.jpg', 'Reading Day Celebration')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/daf95a0f-583d-4484-b6eb-0f7474c9166f.jpg" alt="Reading Day" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-lang" style="margin-bottom: 0.5rem;">Library</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Reading Week Event</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Promoting reading habits & literature.</p>
+          </div>
+        </div>
+
+        <!-- Photo 21 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/e5c796ab-7f17-483f-bb42-566937f51892.jpg', 'Mid-Day Meal Facility')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/e5c796ab-7f17-483f-bb42-566937f51892.jpg" alt="Mid-day Meal" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-oa" style="margin-bottom: 0.5rem;">Nutrition</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Hygienic Mid-Day Meal</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Nutritious lunch served daily.</p>
+          </div>
+        </div>
+
+        <!-- Photo 22 -->
+        <div class="gallery-card gallery-item events" onclick="openLightbox('images/gallery/e70aa6bd-6bf7-4eb3-90c9-508d3eeb30ad.jpg', 'School Function & Awards')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/e70aa6bd-6bf7-4eb3-90c9-508d3eeb30ad.jpg" alt="School Function" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-hm" style="margin-bottom: 0.5rem;">Awards</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Annual Awards Night</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Honoring student achievements & merit.</p>
+          </div>
+        </div>
+
+        <!-- Photo 23 -->
+        <div class="gallery-card gallery-item activities" onclick="openLightbox('images/gallery/e9896752-3181-479b-99a0-ee9197330871.jpg', 'Student Excellence Certificate Distribution')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/e9896752-3181-479b-99a0-ee9197330871.jpg" alt="Certificate Distribution" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Excellence</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">Merit Certificates</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Celebrating academic & co-curricular talent.</p>
+          </div>
+        </div>
+
+        <!-- Photo 24 -->
+        <div class="gallery-card gallery-item campus" onclick="openLightbox('images/gallery/743fda55-3eed-4646-81f6-4dff666fba94.jpg', 'UPGS Punukkannoor Campus View')">
+          <div class="gallery-img-box">
+            <img src="images/gallery/743fda55-3eed-4646-81f6-4dff666fba94.jpg" alt="Campus Atmosphere" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-info">
+            <span class="designation-badge badge-upst" style="margin-bottom: 0.5rem;">Campus View</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 0.25rem;">School Environment</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Scenic educational surroundings.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Lightbox Modal Container -->
+  <div id="imageLightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightboxDirect()">&times;</span>
+    <img class="lightbox-content" id="lightboxImage" alt="Expanded Photo View">
+  </div>
+
+  <!-- Gallery Filter & Lightbox Script -->
+  <script>
+    function filterGallery(category, btn) {
+      var buttons = document.querySelectorAll('.gallery-filter-btn');
+      buttons.forEach(function(b) {
+        b.classList.remove('btn-primary', 'active');
+        b.classList.add('btn-outline');
+      });
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary', 'active');
+
+      var items = document.querySelectorAll('.gallery-item');
+      items.forEach(function(item) {
+        if (category === 'all' || item.classList.contains(category)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function openLightbox(imgSrc, caption) {
+      var modal = document.getElementById('imageLightboxModal');
+      var modalImg = document.getElementById('lightboxImage');
+      modal.style.display = 'flex';
+      modalImg.src = imgSrc;
+      modalImg.alt = caption;
+    }
+
+    function closeLightbox(e) {
+      if (e.target.id === 'imageLightboxModal') {
+        document.getElementById('imageLightboxModal').style.display = 'none';
+      }
+    }
+
+    function closeLightboxDirect() {
+      document.getElementById('imageLightboxModal').style.display = 'none';
+    }
+  </script>
+
+  <!-- Minimalist Site Footer -->
+  <footer class="site-footer-minimal">
+    <div class="container">
+      <div class="footer-grid-4">
+        <div>
+          <h2 class="footer-brand-title" data-i18n="school_name">UPGS Punukkannoor</h2>
+          <p data-i18n="footer_desc" style="font-size: 0.95rem; line-height: 1.6;">Upper Primary Government School Punukkannoor, Kollam. Dedicated to educational excellence since 1926.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading" data-i18n="footer_quick_links">Quick Links</h4>
+          <ul class="footer-nav-list">
+            <li><a href="about.html" data-i18n="nav_about">About Us</a></li>
+            <li><a href="staff.html" data-i18n="nav_staff">Staff Directory</a></li>
+            <li><a href="alumni.html" data-i18n="nav_alumni">Alumni Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-nav-list">
+            <li><a href="virtual-tour.html" data-i18n="nav_tour">360° Tour</a></li>
+            <li><a href="gallery.html" data-i18n="nav_gallery">Photo Gallery</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading" data-i18n="footer_contact_info">Contact Info</h4>
+          <p style="margin-bottom: 0.5rem; font-size: 0.95rem;" data-i18n="footer_address">UPGSchool Punukkonnoor, Alummoodu P.O., Kundara - 691577</p>
+          <p style="margin-bottom: 0.5rem; font-size: 0.95rem;"><i class="fas fa-phone"></i> <a href="tel:9447135592" style="color: inherit; text-decoration: none;">+91 9447135592</a></p>
+          <p style="font-size: 0.95rem;"><i class="fas fa-envelope"></i> <a href="mailto:41660kundaraupgs@gmail.com" style="color: inherit; text-decoration: none;">41660kundaraupgs@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="footer-sub-bar">
+        <p data-i18n="footer_rights">© 2026 UPGS Punukkannoor 100th Centenary Committee. All Rights Reserved.</p>
+        <p>Built with ❤️ for UPGS Punukkannoor</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

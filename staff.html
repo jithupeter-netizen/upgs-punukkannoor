@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Directory - UPGS Punukkannoor 100th Centenary Celebration</title>
+  <meta name="description" content="Meet the teaching and administrative staff of UPGS Punukkannoor. Dedicated educators committed to academic excellence.">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-social-links">
+        <a href="#" class="top-social-icon" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/upgschoolpunukkonnoor" class="top-social-icon" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/919447135592" class="top-social-icon" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="top-social-icon" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="top-bar-actions">
+        <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
+        <button class="lang-switch-btn" onclick="toggleLanguage()">
+          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <div class="brand-text">
+          <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
+          <p data-i18n="school_tagline">Upper Primary Government School</p>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <ul class="nav-links-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-item-link" data-i18n="nav_home">Home</a></li>
+        
+        <li class="nav-item-dropdown">
+          <a href="about.html" class="nav-item-link active">
+            <span data-i18n="nav_about">About Us</span> <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 2px;"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html" class="dropdown-item" data-i18n="nav_about_school"><i class="fas fa-university" style="color: var(--accent-blue);"></i> About School</a></li>
+            <li><a href="staff.html" class="dropdown-item" data-i18n="nav_staff"><i class="fas fa-chalkboard-teacher" style="color: var(--accent-coral);"></i> Staff Directory</a></li>
+            <li><a href="about.html#curriculum" class="dropdown-item" data-i18n="nav_curriculum"><i class="fas fa-book-open" style="color: #d97706;"></i> Curriculum</a></li>
+          </ul>
+        </li>
+
+        <li><a href="virtual-tour.html" class="nav-item-link" data-i18n="nav_tour">360° Tour</a></li>
+        <li><a href="gallery.html" class="nav-item-link" data-i18n="nav_gallery">Gallery</a></li>
+        <li><a href="contact.html" class="nav-item-link" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="alumni.html" class="nav-cta-btn" data-i18n="nav_register_btn">Join Alumni</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 5rem 0 4.5rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral);">
+    <div class="container">
+      <span class="marquee-badge" style="background: var(--accent-coral); color: #ffffff; padding: 0.4rem 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+        <i class="fas fa-chalkboard-teacher"></i> <span>FACULTY & STAFF DIRECTORY</span>
+      </span>
+      <h1 style="font-size: 3rem; font-weight: 800; color: #ffffff; margin-bottom: 1rem;" data-i18n="staff_title">Meet Our Esteemed Faculty & Staff</h1>
+      <p style="color: #cbd5e1; font-size: 1.2rem; max-width: 750px; margin: 0 auto;" data-i18n="staff_desc">44 Dedicated Educators and Administrative Staff Members Guiding UPGS Punukkannoor.</p>
+    </div>
+  </section>
+
+  <!-- Staff Directory Table Section -->
+  <section style="padding: 5rem 0; background-color: var(--bg-white);">
+    <div class="container">
+      <!-- Search & Filter Controls -->
+      <div class="staff-search-bar">
+        <div class="staff-search-input-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" id="staffSearchInput" class="staff-search-input" placeholder="Search teacher by name, designation, or qualification..." onkeyup="filterStaffTable()">
+        </div>
+        <div style="font-size: 0.95rem; color: #64748b; font-weight: 600;">
+          Total Staff Members: <span style="color: var(--accent-coral); font-weight: 800; font-size: 1.1rem;">44</span>
+        </div>
+      </div>
+
+      <!-- Staff Directory Table -->
+      <div class="staff-table-wrapper">
+        <table class="staff-table" id="staffDirectoryTable">
+          <thead>
+            <tr>
+              <th style="width: 80px; text-align: center;">Sl. No.</th>
+              <th>Name of the Teacher</th>
+              <th>Designation</th>
+              <th>Qualification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hm-row">
+              <td style="text-align: center; font-weight: 800; color: #b45309;">1</td>
+              <td>
+                <strong style="font-size: 1.05rem; color: var(--primary-navy);">Vijayalekshmi.R</strong>
+                <span style="display: block; font-size: 0.78rem; color: #b45309; font-weight: 700;">★ Headmistress</span>
+              </td>
+              <td><span class="designation-badge badge-hm">HM (Headmistress)</span></td>
+              <td><strong>BSc, B.Ed</strong></td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">2</td>
+              <td><strong>Manju Venu</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">3</td>
+              <td><strong>Nitha.S</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">4</td>
+              <td><strong>Sheeja.G.R</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">5</td>
+              <td><strong>Priya.C.J</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">6</td>
+              <td><strong>Veena.G.R</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>BA, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">7</td>
+              <td><strong>Lakshmi.D</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>BA, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">8</td>
+              <td><strong>Seethalekshmi.K.G</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>BSc, TTC, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">9</td>
+              <td><strong>Priji John</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">10</td>
+              <td><strong>Manu.M</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>B.Sc, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">11</td>
+              <td><strong>Padmaja.R</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>B.Sc, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">12</td>
+              <td><strong>Soniya John</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>B.Sc, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">13</td>
+              <td><strong>Maya.S</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>BA, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">14</td>
+              <td><strong>Anupama Thomas</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>VHSE, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">15</td>
+              <td><strong>Renju Venu</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>B.Sc, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">16</td>
+              <td><strong>Sindhu.B</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>B.Sc, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">17</td>
+              <td><strong>Jiju Mathew</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>BA, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">18</td>
+              <td><strong>Blessy Koshy</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>BA, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">19</td>
+              <td><strong>Ginikumary Amma.T</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>MA, B.Ed, SET</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">20</td>
+              <td><strong>Pamila Sathees</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">21</td>
+              <td><strong>Sandhya.B</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>BA, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">22</td>
+              <td><strong>Gopika.C.S</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>BA, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">23</td>
+              <td><strong>Renjini.T.R</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">24</td>
+              <td><strong>Jyothysree.T.S</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>BA, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">25</td>
+              <td><strong>Jayasree.L</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>M.Com, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">26</td>
+              <td><strong>Deepthi.B</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>PDC, TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">27</td>
+              <td><strong>Deepthi.s.Nath</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>MA, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">28</td>
+              <td><strong>Raji.R</strong></td>
+              <td><span class="designation-badge badge-lang">Sanskrit Tr</span></td>
+              <td>PlusTwo, Sanskrit TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">29</td>
+              <td><strong>Nissamudeen.M</strong></td>
+              <td><span class="designation-badge badge-lang">Arabic Tr</span></td>
+              <td>BA, Arabic B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">30</td>
+              <td><strong>Reji.C.Nair</strong></td>
+              <td><span class="designation-badge badge-lang">Hindi Tr</span></td>
+              <td>MA, Hindi B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">31</td>
+              <td><strong>Neethulekshmi.V</strong></td>
+              <td><span class="designation-badge badge-lang">Junior Hindi Tr</span></td>
+              <td>SSLC, HSC Hindi Booshan Sahithyacharya</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">32</td>
+              <td><strong>Shameena.S.J</strong></td>
+              <td><span class="designation-badge badge-lang">Urdu Tr</span></td>
+              <td>PDC, Urdu Higher</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">33</td>
+              <td><strong>Sumimole S</strong></td>
+              <td><span class="designation-badge badge-lang">P.E.T (Physical Education)</span></td>
+              <td>SSLC, M P.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">34</td>
+              <td><strong>Rahul.R</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>MA, B.Ed, SET</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">35</td>
+              <td><strong>Vandana S</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>BA, D.El.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">36</td>
+              <td><strong>Gokul Murali</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>Plus Two, D.El.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">37</td>
+              <td><strong>Raheena</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>BSc, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">38</td>
+              <td><strong>Sandra Hari</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>B.Com, D.El.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">39</td>
+              <td><strong>Aravind M.G</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>B.Tech, D.El.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">40</td>
+              <td><strong>Aswathy A S</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>PlusTwo, D.El.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">41</td>
+              <td><strong>Krishna Kumar C</strong></td>
+              <td><span class="designation-badge badge-upst">UPST</span></td>
+              <td>B.Sc, B.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">42</td>
+              <td><strong>Niveditha PB</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>Plus Two, D.El.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">43</td>
+              <td><strong>Hridya Mariam Prasanth</strong></td>
+              <td><span class="designation-badge badge-lpst">LPST</span></td>
+              <td>Plus Two, D.El.Ed</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: 700; color: #64748b;">44</td>
+              <td><strong>Lekshmi P</strong></td>
+              <td><span class="designation-badge badge-oa">OA (Office Assistant)</span></td>
+              <td>Plus Two, PDC</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Search Filter Script -->
+  <script>
+    function filterStaffTable() {
+      var input = document.getElementById("staffSearchInput");
+      var filter = input.value.toUpperCase();
+      var table = document.getElementById("staffDirectoryTable");
+      var tr = table.getElementsByTagName("tr");
+      
+      for (var i = 1; i < tr.length; i++) {
+        var tdName = tr[i].getElementsByTagName("td")[1];
+        var tdRole = tr[i].getElementsByTagName("td")[2];
+        var tdQual = tr[i].getElementsByTagName("td")[3];
+        
+        if (tdName || tdRole || tdQual) {
+          var txtName = tdName ? (tdName.textContent || tdName.innerText) : "";
+          var txtRole = tdRole ? (tdRole.textContent || tdRole.innerText) : "";
+          var txtQual = tdQual ? (tdQual.textContent || tdQual.innerText) : "";
+          
+          if (txtName.toUpperCase().indexOf(filter) > -1 || 
+              txtRole.toUpperCase().indexOf(filter) > -1 || 
+              txtQual.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Minimalist Site Footer -->
+  <footer class="site-footer-minimal">
+    <div class="container">
+      <div class="footer-grid-4">
+        <div>
+          <h2 class="footer-brand-title" data-i18n="school_name">UPGS Punukkannoor</h2>
+          <p data-i18n="footer_desc" style="font-size: 0.95rem; line-height: 1.6;">Upper Primary Government School Punukkannoor, Kollam. Dedicated to educational excellence since 1926.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading" data-i18n="footer_quick_links">Quick Links</h4>
+          <ul class="footer-nav-list">
+            <li><a href="about.html" data-i18n="nav_about">About Us</a></li>
+            <li><a href="staff.html" data-i18n="nav_staff">Staff Directory</a></li>
+            <li><a href="alumni.html" data-i18n="nav_alumni">Alumni Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-nav-list">
+            <li><a href="virtual-tour.html" data-i18n="nav_tour">360° Tour</a></li>
+            <li><a href="gallery.html" data-i18n="nav_gallery">Photo Gallery</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading" data-i18n="footer_contact_info">Contact Info</h4>
+          <p style="margin-bottom: 0.5rem; font-size: 0.95rem;" data-i18n="footer_address">UPGSchool Punukkonnoor, Alummoodu P.O., Kundara - 691577</p>
+          <p style="margin-bottom: 0.5rem; font-size: 0.95rem;"><i class="fas fa-phone"></i> <a href="tel:9447135592" style="color: inherit; text-decoration: none;">+91 9447135592</a></p>
+          <p style="font-size: 0.95rem;"><i class="fas fa-envelope"></i> <a href="mailto:41660kundaraupgs@gmail.com" style="color: inherit; text-decoration: none;">41660kundaraupgs@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="footer-sub-bar">
+        <p data-i18n="footer_rights">© 2026 UPGS Punukkannoor 100th Centenary Committee. All Rights Reserved.</p>
+        <p>Built with ❤️ for UPGS Punukkannoor</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

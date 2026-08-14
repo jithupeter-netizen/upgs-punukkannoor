@@ -1,0 +1,144 @@
+/* UPGS Punukkannoor - Option D: Minimalist White Editorial Design System */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap');
+
+:root {
+  /* Minimalist Color Palette */
+  --primary-navy:     #0a192f; /* Deep Navy Text */
+  --brand-blue:       #1e3a8a;
+  --accent-coral:     #ff4e31; /* Vibrant Accent */
+  --accent-blue:      #2563eb;
+  
+  /* Neutrals */
+  --bg-white:         #ffffff;
+  --bg-slate:         #fafafa;
+  --bg-card:          #ffffff;
+  --border-light:     #e5e7eb;
+  --border-subtle:    #f3f4f6;
+
+  /* Centenary Gold */
+  --centenary-gold:   #d97706;
+  --gold-bg:          #fffbeb;
+  --gold-border:      #fde68a;
+
+  /* Typography */
+  --font-heading: 'Outfit', 'Noto Sans Malayalam', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Noto Sans Malayalam', sans-serif;
+  --font-ml: 'Noto Sans Malayalam', sans-serif;
+
+  /* Elevation & Radius - Box Straight Style */
+  --radius-sm:  0px;
+  --radius-md:  0px;
+  --radius-lg:  0px;
+  --radius-pill:0px;
+
+  --shadow-sm: 0 4px 14px rgba(10, 25, 47, 0.04);
+  --shadow-md: 0 12px 32px rgba(10, 25, 47, 0.08);
+  --shadow-lg: 0 24px 60px rgba(10, 25, 47, 0.12);
+
+  --transition-fast: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--primary-navy);
+  background-color: var(--bg-white);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+[lang="ml"] {
+  font-family: var(--font-ml);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--primary-navy);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Minimalist Badge Utility */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1.2rem;
+  background-color: var(--gold-bg);
+  color: var(--centenary-gold);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-header .tag {
+  color: var(--accent-blue);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.section-header p {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+/* Grid Layouts */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+@media (max-width: 992px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .section-header h2 { font-size: 2rem; }
+}
+
+@media (max-width: 640px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .container { padding: 0 1rem; }
+}
