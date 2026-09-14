@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
 </head>
 <body>
 
@@ -23,9 +29,6 @@
       </div>
       <div class="top-bar-actions">
         <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
-        <button class="lang-switch-btn" onclick="toggleLanguage()">
-          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
-        </button>
       </div>
     </div>
   </div>
@@ -34,10 +37,9 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="brand-logo">
-        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <img loading="lazy"  src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
         <div class="brand-text">
           <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
-          <p data-i18n="school_tagline">Upper Primary Government School</p>
         </div>
       </a>
 
@@ -83,7 +85,7 @@
     <div class="container">
       <div class="welcome-section-grid" style="align-items: center; margin-bottom: 4rem;">
         <div class="welcome-image-wrapper">
-          <img src="images/upgs_school_building.jpg" alt="UPGS Punukkannoor School Campus" class="welcome-image">
+          <img loading="lazy"  src="images/upgs_school_building.jpg" alt="UPGS Punukkannoor School Campus" class="welcome-image">
           <div class="welcome-image-badge">
             <i class="fas fa-school"></i>
             <span>Code: 41660</span>
@@ -150,28 +152,28 @@
       </div>
 
       <div class="grid-4" style="margin-bottom: 3.5rem;">
-        <div class="card" style="border-top: 4px solid var(--accent-blue); background: #ffffff; padding: 1.75rem; border-radius: 8px;">
-          <span style="font-size: 1.75rem; font-weight: 800; color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">1926</span>
-          <h3 data-i18n="mile_1_title">Foundation Era</h3>
-          <p data-i18n="mile_1_desc">Started with Classes 1 and 2 in Punukkannoor, growing to serve rural educational needs.</p>
+        <div class="card" style="border-top: 4px solid var(--accent-gold); background: var(--bg-tint-gold); padding: 1.75rem; border-radius: 12px; box-shadow: var(--shadow-sm);">
+          <span style="font-size: 1.85rem; font-weight: 900; color: var(--accent-gold); display: block; margin-bottom: 0.5rem;">1926</span>
+          <h3>Foundation Era</h3>
+          <p style="color: #64748b; font-size: 0.95rem;">Started with Classes 1 and 2 in Punukkannoor, growing to serve rural educational needs.</p>
         </div>
 
-        <div class="card" style="border-top: 4px solid var(--accent-blue); background: #ffffff; padding: 1.75rem; border-radius: 8px;">
-          <span style="font-size: 1.75rem; font-weight: 800; color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">1958–59</span>
-          <h3 data-i18n="mile_2_title">Primary Recognition</h3>
-          <p data-i18n="mile_2_desc">Received official recognition up to Class 5, expanding primary learning in Kundara.</p>
+        <div class="card" style="border-top: 4px solid var(--accent-emerald); background: var(--bg-tint-emerald); padding: 1.75rem; border-radius: 12px; box-shadow: var(--shadow-sm);">
+          <span style="font-size: 1.85rem; font-weight: 900; color: var(--accent-emerald); display: block; margin-bottom: 0.5rem;">1958–59</span>
+          <h3>Primary Recognition</h3>
+          <p style="color: #64748b; font-size: 0.95rem;">Received official recognition up to Class 5, expanding primary learning in Kundara.</p>
         </div>
 
-        <div class="card" style="border-top: 4px solid var(--accent-blue); background: #ffffff; padding: 1.75rem; border-radius: 8px;">
-          <span style="font-size: 1.75rem; font-weight: 800; color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">1966–67</span>
-          <h3 data-i18n="mile_3_title">UP School Upgradation</h3>
-          <p data-i18n="mile_3_desc">Recognition extended to Classes 6 and 7, officially upgrading to Upper Primary School.</p>
+        <div class="card" style="border-top: 4px solid var(--accent-blue); background: var(--bg-tint-blue); padding: 1.75rem; border-radius: 12px; box-shadow: var(--shadow-sm);">
+          <span style="font-size: 1.85rem; font-weight: 900; color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">1966–67</span>
+          <h3>UP School Upgradation</h3>
+          <p style="color: #64748b; font-size: 0.95rem;">Recognition extended to Classes 6 and 7, officially upgrading to Upper Primary School.</p>
         </div>
 
-        <div class="card" style="border-top: 4px solid var(--centenary-gold); background: #ffffff; padding: 1.75rem; border-radius: 8px;">
-          <span style="font-size: 1.75rem; font-weight: 800; color: #b45309; display: block; margin-bottom: 0.5rem;">2026</span>
-          <h3 data-i18n="mile_4_title">Centenary Jubilee</h3>
-          <p data-i18n="mile_4_desc">Celebrating 100 years of learning, values, and community development.</p>
+        <div class="card" style="border-top: 4px solid var(--accent-purple); background: var(--bg-tint-purple); padding: 1.75rem; border-radius: 12px; box-shadow: var(--shadow-sm);">
+          <span style="font-size: 1.85rem; font-weight: 900; color: var(--accent-purple); display: block; margin-bottom: 0.5rem;">2026</span>
+          <h3>Centenary Jubilee</h3>
+          <p style="color: #64748b; font-size: 0.95rem;">Celebrating 100 years of learning, values, and community development.</p>
         </div>
       </div>
 
@@ -366,7 +368,6 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

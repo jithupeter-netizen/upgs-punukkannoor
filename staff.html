@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
 </head>
 <body>
 
@@ -23,9 +29,6 @@
       </div>
       <div class="top-bar-actions">
         <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
-        <button class="lang-switch-btn" onclick="toggleLanguage()">
-          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
-        </button>
       </div>
     </div>
   </div>
@@ -34,10 +37,9 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="brand-logo">
-        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <img loading="lazy"  src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
         <div class="brand-text">
           <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
-          <p data-i18n="school_tagline">Upper Primary Government School</p>
         </div>
       </a>
 
@@ -449,7 +451,6 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

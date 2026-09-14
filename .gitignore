@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+*.log
+fix-badges.js
+fix_controls.js
+fix_html.js
+optimize.js
+remove-lang.js
+style_form.js
+update_alumni_page.js
+update_contact_page.js
+update_map.js

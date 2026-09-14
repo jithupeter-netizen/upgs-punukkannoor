@@ -2,7 +2,6 @@
 
 [![School](https://img.shields.io/badge/School-UPGS%20Punukkannoor-blue.svg)](https://github.com)
 [![Centenary](https://img.shields.io/badge/Jubilee-100%20Years%20(1926--2026)-gold.svg)](https://github.com)
-[![Languages](https://img.shields.io/badge/Languages-English%20%7C%20%E0%B4%AE%E0%B4%B2%E0%B4%AF%E0%B4%BE%E0%B4%B3%E0%B4%82-success.svg)](https://github.com)
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com)
 
 Welcome to the official web application for **Upper Primary Government School (UPGS) Punukkannoor**, located in Kollam District, Kerala, India. 
@@ -12,10 +11,6 @@ Designed with a **Minimalist Editorial** aesthetic, this responsive website cele
 ---
 
 ## ✨ Features & Highlights
-
-### 🌐 Bilingual Support (English & Malayalam)
-- **Instant Language Switching**: Toggle between English and Malayalam (മലയാളം) across all pages with a single click.
-- **Custom i18n Engine**: Powered by lightweight client-side translation bindings using `data-i18n` attributes.
 
 ### 👓 360° Interactive Virtual Campus Tour
 - **Full VR Experience**: Powered by **Pannellum 360**, offering immersive interactive panoramas of key campus locations.
@@ -55,7 +50,6 @@ UPGS Punukkannoor/
 │   ├── components.css    # UI Components (Cards, Buttons, Modals, Forms)
 │   └── virtual-tour.css  # Styles for 360 VR Viewer & Hotspot Tooltips
 ├── js/
-│   ├── i18n.js           # Bilingual Dictionary & Translation Controller
 │   ├── main.js           # Global Navigation, Mobile Menu, & UI Interactions
 │   ├── 360-viewer.js     # Pannellum Virtual Tour Initializer & Hotspots
 │   ├── hero-slider.js    # Centenary Editorial Hero Slider Controller
@@ -74,7 +68,6 @@ UPGS Punukkannoor/
 | **360° Panoramic VR** | [Pannellum 360](https://pannellum.org/) | Equirectangular VR viewing engine for campus navigation |
 | **Iconography** | [FontAwesome 6.4.0](https://fontawesome.com/) | Vector icons for UI elements and navigation |
 | **Typography** | Google Fonts | Modern, clean editorial fonts for readability |
-| **i18n Translation** | Custom JavaScript Engine (`js/i18n.js`) | Client-side DOM translation without page reloads |
 
 ---
 

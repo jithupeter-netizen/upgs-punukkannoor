@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
 </head>
 <body>
 
@@ -23,9 +29,6 @@
       </div>
       <div class="top-bar-actions">
         <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
-        <button class="lang-switch-btn" onclick="toggleLanguage()">
-          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
-        </button>
       </div>
     </div>
   </div>
@@ -34,10 +37,9 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="brand-logo">
-        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <img loading="lazy" src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
         <div class="brand-text">
           <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
-          <p data-i18n="school_tagline">Upper Primary Government School</p>
         </div>
       </a>
 
@@ -68,98 +70,129 @@
   </nav>
 
   <!-- Page Header -->
-  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 5rem 0 4.5rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral);">
-    <div class="container">
-      <span class="marquee-badge" style="background: var(--accent-coral); color: #ffffff; padding: 0.4rem 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 4.5rem 0 4rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral); position: relative; overflow: hidden;">
+    <div class="container" style="position: relative; z-index: 2;">
+      <span class="marquee-badge" style="background: var(--accent-coral); color: #ffffff; padding: 0.4rem 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
         <i class="fas fa-user-graduate"></i> <span>CENTENARY ALUMNI DATA COLLECTION DRIVE</span>
       </span>
-      <h1 style="font-size: 3rem; font-weight: 800; color: #ffffff; margin-bottom: 1rem;" data-i18n="alumni_title">Reconnect with Your Alma Mater</h1>
-      <p style="color: #cbd5e1; font-size: 1.2rem; max-width: 750px; margin: 0 auto;" data-i18n="alumni_desc">Calling all former students of UPGS Punukkannoor! Please register your details below to feature in our 100th Centenary Jubilee Souvenir Directory.</p>
+      <h1 style="font-size: 2.85rem; font-weight: 800; color: #ffffff; margin-bottom: 0.75rem; font-family: var(--font-heading);" data-i18n="alumni_title">Reconnect with Your Alma Mater</h1>
+      <p style="color: #cbd5e1; font-size: 1.15rem; max-width: 720px; margin: 0 auto; line-height: 1.6;" data-i18n="alumni_desc">Calling all former students of UPGS Punukkannoor! Please register your details below to feature in our 100th Centenary Jubilee Souvenir Directory.</p>
     </div>
   </section>
 
   <!-- Alumni Registration Form Section -->
-  <section style="padding: 5rem 0; background-color: #f8fafc;">
-    <div class="container" style="max-width: 860px;">
-      <div class="form-container">
+  <section class="contact-section-wrapper">
+    <div class="container" style="max-width: 840px;">
+      
+      <div class="form-container-card">
         
-        <div style="text-align: center; margin-bottom: 2.5rem;">
-          <h2 style="font-size: 1.85rem; color: var(--primary-blue); margin-bottom: 0.5rem;">Centenary Alumni Registration Form</h2>
-          <p style="color: var(--text-secondary);">പൂർവ്വവിദ്യാർത്ഥി വിവരശേഖരണ ഫോം (1926 - 2026)</p>
+        <div class="form-card-header" style="text-align: center;">
+          <span class="form-card-badge"><i class="fas fa-award"></i> Centenary Alumni Archive (1926 – 2026)</span>
+          <h2 class="form-card-title">Alumni Registration Form</h2>
+          <p class="form-card-desc">Fill out your details to join the centenary celebrations, receive commemorative invites, and stay connected with fellow alumni.</p>
         </div>
 
         <form id="alumni-registration-form">
-          <div class="grid-2">
-            <!-- Full Name -->
-            <div class="form-group">
-              <label class="form-label" for="full_name">
-                <span data-i18n="form_full_name">Full Name</span> <span class="required">*</span>
+          
+          <!-- Row 1: Full Name & Passing Year -->
+          <div class="form-grid-row">
+            <div>
+              <label class="form-custom-label" for="full_name">
+                <span>Full Name</span>
+                <span class="req">*</span>
               </label>
-              <input type="text" id="full_name" class="form-control" placeholder="e.g. Rahul Nair / രാഹുൽ നായർ" required>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="full_name" class="form-custom-input" placeholder="e.g. Rahul Nair" required>
+              </div>
             </div>
 
-            <!-- Passing Year -->
-            <div class="form-group">
-              <label class="form-label" for="passing_year">
-                <span data-i18n="form_passing_year">Batch / Year of Passing</span> <span class="required">*</span>
+            <div>
+              <label class="form-custom-label" for="passing_year">
+                <span>Batch / Passing Year</span>
+                <span class="req">*</span>
               </label>
-              <select id="passing_year" class="form-control" required>
-                <option value="">Select Batch Year / വർഷം തിരഞ്ഞെടുക്കുക</option>
-                <!-- Populated dynamically by alumni-form.js from 2026 down to 1926 -->
-              </select>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <!-- Phone Number -->
-            <div class="form-group">
-              <label class="form-label" for="phone_number">
-                <span data-i18n="form_phone">WhatsApp Contact Number</span> <span class="required">*</span>
-              </label>
-              <input type="tel" id="phone_number" class="form-control" placeholder="e.g. +91 9876543210" required>
-            </div>
-
-            <!-- Email -->
-            <div class="form-group">
-              <label class="form-label" for="email">
-                <span data-i18n="form_email">Email Address (Optional)</span>
-              </label>
-              <input type="email" id="email" class="form-control" placeholder="name@example.com">
+              <div class="input-icon-wrapper">
+                <i class="fas fa-calendar-alt input-icon"></i>
+                <select id="passing_year" class="form-custom-select" required>
+                  <option value="" disabled selected>Select Batch Year</option>
+                  <!-- Populated dynamically by alumni-form.js from 2026 down to 1926 -->
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="grid-2">
-            <!-- Current Location -->
-            <div class="form-group">
-              <label class="form-label" for="location">
-                <span data-i18n="form_location">Current City / Country</span>
+          <!-- Row 2: WhatsApp Number & Email -->
+          <div class="form-grid-row">
+            <div>
+              <label class="form-custom-label" for="phone_number">
+                <span>WhatsApp Contact Number</span>
+                <span class="req">*</span>
               </label>
-              <input type="text" id="location" class="form-control" placeholder="e.g. Kollam / Dubai, UAE">
+              <div class="input-icon-wrapper">
+                <i class="fab fa-whatsapp input-icon" style="color: #059669;"></i>
+                <input type="tel" id="phone_number" class="form-custom-input" placeholder="e.g. +91 9876543210" required>
+              </div>
             </div>
 
-            <!-- Occupation -->
-            <div class="form-group">
-              <label class="form-label" for="occupation">
-                <span data-i18n="form_occupation">Current Profession / Occupation</span>
+            <div>
+              <label class="form-custom-label" for="email">
+                <span>Email Address (Optional)</span>
               </label>
-              <input type="text" id="occupation" class="form-control" placeholder="e.g. Engineer / Teacher / Business">
+              <div class="input-icon-wrapper">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="email" class="form-custom-input" placeholder="name@example.com">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Current City/Country & Profession -->
+          <div class="form-grid-row">
+            <div>
+              <label class="form-custom-label" for="location">
+                <span>Current City / Country</span>
+              </label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-map-marker-alt input-icon"></i>
+                <input type="text" id="location" class="form-custom-input" placeholder="e.g. Kollam / Dubai, UAE">
+              </div>
+            </div>
+
+            <div>
+              <label class="form-custom-label" for="occupation">
+                <span>Current Profession / Occupation</span>
+              </label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-briefcase input-icon"></i>
+                <input type="text" id="occupation" class="form-custom-input" placeholder="e.g. Software Engineer / Teacher / Business">
+              </div>
             </div>
           </div>
 
           <!-- Memories / Message -->
-          <div class="form-group">
-            <label class="form-label" for="memories">
-              <span data-i18n="form_memories">School Memories & Centenary Message</span>
+          <div class="form-field-group">
+            <label class="form-custom-label" for="memories">
+              <span>School Memories & Centenary Wishes</span>
             </label>
-            <textarea id="memories" class="form-control" placeholder="Share your favorite teachers, school memories, or greetings for the 100th anniversary..."></textarea>
+            <div class="input-icon-wrapper">
+              <i class="fas fa-comment-quote input-icon" style="top: 1.25rem;"></i>
+              <textarea id="memories" class="form-custom-textarea" placeholder="Share your favorite teachers, nostalgic school memories, or greetings for the 100th anniversary celebration..."></textarea>
+            </div>
           </div>
 
-          <!-- Submit Button -->
-          <div style="text-align: center; margin-top: 2rem;">
-            <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem; width: 100%; max-width: 400px;">
-              <i class="fas fa-paper-plane"></i> <span data-i18n="form_submit_btn">Submit Alumni Registration</span>
+          <!-- Submit Button & Trust Assurance -->
+          <div class="form-action-row" style="margin-top: 1.5rem;">
+            <button type="submit" class="form-stylish-btn">
+              <span>Submit Alumni Registration</span>
+              <i class="fas fa-paper-plane"></i>
             </button>
+
+            <div class="form-security-note">
+              <i class="fas fa-shield-check"></i>
+              <span>Official UPGS Punukkannoor 100th Centenary Archive • Free Registration</span>
+            </div>
           </div>
+
         </form>
 
       </div>
@@ -169,20 +202,20 @@
   <!-- Registration Success Modal -->
   <div class="modal-backdrop" id="success-modal">
     <div class="modal-content">
-      <div class="modal-icon">
-        <i class="fas fa-check-circle"></i>
+      <div class="modal-icon-badge">
+        <i class="fas fa-check"></i>
       </div>
-      <h2 style="color: var(--primary-blue); font-size: 1.75rem; margin-bottom: 0.5rem;">Registration Successful!</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">നന്ദി! നിങ്ങളുടെ അലുമ്നി രജിസ്ട്രേഷൻ വിജയകരമായി രേഖപ്പെടുത്തി.</p>
+      <h2 style="color: var(--primary-navy); font-size: 1.85rem; font-weight: 800; margin-bottom: 0.5rem;">Registration Successful!</h2>
+      <p style="color: #64748b; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem;">Thank you! Your alumni registration details have been securely recorded for the centenary archive.</p>
       
-      <div style="background-color: var(--very-light-blue); padding: 1.25rem; border-radius: var(--radius-md); border: 1px dashed var(--secondary-blue); margin-bottom: 1.5rem;">
-        <span style="font-size: 0.85rem; color: var(--text-secondary); display: block;">Registration Receipt ID:</span>
-        <strong id="modal-receipt-id" style="font-size: 1.5rem; color: var(--primary-blue); letter-spacing: 0.05em;">UPGS100-ALM-8492</strong>
-        <p id="modal-user-name" style="font-size: 0.95rem; font-weight: 600; margin-top: 0.25rem; color: var(--text-dark);"></p>
+      <div class="modal-receipt-box">
+        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 0.25rem;">Registration Receipt ID:</span>
+        <strong id="modal-receipt-id" style="font-size: 1.6rem; color: var(--accent-blue); letter-spacing: 0.05em; font-family: var(--font-heading);">UPGS100-ALM-8492</strong>
+        <p id="modal-user-name" style="font-size: 1rem; font-weight: 700; margin-top: 0.5rem; color: var(--primary-navy);"></p>
       </div>
 
-      <button class="btn btn-primary" onclick="closeModal()" style="width: 100%;">
-        Done / ശരി
+      <button class="form-stylish-btn" onclick="closeModal()" style="width: 100%; padding: 0.9rem;">
+        Done
       </button>
     </div>
   </div>
@@ -229,8 +262,7 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/alumni-form.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/alumni-form.js"></script>
 </body>
 </html>

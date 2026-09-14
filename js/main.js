@@ -79,42 +79,116 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 3. Stats Counter Animation
+  // 3. Dynamic Stats Counter Animation with Smooth Easing & Staggered Reveal
   const statNumbers = document.querySelectorAll('.stat-number');
+  const statCards = document.querySelectorAll('.stat-card-modern');
   let animated = false;
 
+  // Staggered initial entrance states
+  statCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(36px)';
+    card.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.14}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.14}s, box-shadow 0.4s ease, border-color 0.4s ease`;
+  });
+
   const animateCounters = () => {
+    // Reveal cards in cascade
+    statCards.forEach((card) => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    });
+
+    // Remove inline transform after entry transition finishes so CSS :hover and 3D tilt work cleanly
+    setTimeout(() => {
+      statCards.forEach((card) => {
+        card.style.transform = '';
+      });
+    }, 1200);
+
     statNumbers.forEach((stat) => {
       const target = parseInt(stat.getAttribute('data-target') || '0', 10);
       const suffix = stat.getAttribute('data-suffix') || '';
-      let count = 0;
-      const speed = target / 50;
+      const duration = 2000; // ms
+      const startTime = performance.now();
 
-      const updateCount = () => {
-        count += speed;
-        if (count < target) {
-          stat.textContent = Math.ceil(count) + suffix;
-          setTimeout(updateCount, 30);
+      // Ease-out expo curve for organic deceleration
+      const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+      const step = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const currentCount = Math.round(easeOutExpo(progress) * target);
+
+        stat.textContent = currentCount + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
         } else {
           stat.textContent = target + suffix;
+          // Subtle celebration scale pop when counting completes
+          stat.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          stat.style.transform = 'scale(1.08)';
+          setTimeout(() => {
+            stat.style.transform = 'scale(1)';
+          }, 350);
         }
       };
 
-      updateCount();
+      requestAnimationFrame(step);
     });
   };
 
-  // Scroll Trigger for Counters
+  // Interactive 3D Mouse Parallax Tilt for Desktop
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    statCards.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.12s ease-out, box-shadow 0.4s ease, border-color 0.4s ease';
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const rotateX = ((y / (rect.height / 2)) * -8).toFixed(2);
+        const rotateY = ((x / (rect.width / 2)) * 8).toFixed(2);
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease';
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // IntersectionObserver Trigger for Robust Viewport Detection
   const statsBanner = document.querySelector('.stats-banner');
   if (statsBanner) {
-    window.addEventListener('scroll', () => {
-      const bannerPosition = statsBanner.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.2;
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !animated) {
+              animated = true;
+              animateCounters();
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(statsBanner);
+    } else {
+      // Fallback for legacy browsers
+      window.addEventListener('scroll', () => {
+        const bannerPosition = statsBanner.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
 
-      if (bannerPosition < screenPosition && !animated) {
-        animated = true;
-        animateCounters();
-      }
-    });
+        if (bannerPosition < screenPosition && !animated) {
+          animated = true;
+          animateCounters();
+        }
+      });
+    }
   }
 });

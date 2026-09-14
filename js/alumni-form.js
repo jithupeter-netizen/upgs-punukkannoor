@@ -1,4 +1,7 @@
-/* UPGS Punukkannoor - Alumni Data Collection Form Handler */
+/* UPGS Punukkannoor - Alumni Data Collection Form Handler with Google Sheets Webhook */
+
+// 👉 Put your Google Apps Script Web App URL here:
+const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzPWgW7k2rj8zDVscQb9IdMK-3etUZ8LIbt3JGBVgsi0CocTAWSzPtjwJ7YmdhbQnw/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const alumniForm = document.getElementById('alumni-registration-form');
@@ -30,42 +33,57 @@ document.addEventListener('DOMContentLoaded', () => {
       const occupation = document.getElementById('occupation').value.trim();
       const memories = document.getElementById('memories').value.trim();
 
-      // Simple Validation
+      // Validation
       if (!fullName || !passingYear || !phoneNumber) {
-        alert('Please fill in all required fields (Full Name, Batch Year, and Phone Number).');
+        alert('Please fill in all required fields (Full Name, Batch Year, and WhatsApp Number).');
         return;
       }
 
       const submitBtn = alumniForm.querySelector('button[type="submit"]');
-      const originalBtnText = submitBtn.textContent;
+      const originalBtnHTML = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting... / നൽകുന്നു...';
+      submitBtn.innerHTML = '<span>Submitting Registration...</span> <i class="fas fa-spinner fa-spin"></i>';
 
-      // Generate Receipt ID for Phase 1 Mock Registration
+      // Generate Receipt ID
       const receiptId = 'UPGS100-ALM-' + Math.floor(1000 + Math.random() * 9000);
 
+      const payload = {
+        receiptId,
+        fullName,
+        passingYear,
+        phoneNumber,
+        email,
+        location,
+        occupation,
+        memories
+      };
+
       try {
-        /* 
-           PHASE 2 Integration:
-           const response = await fetch('https://api.upgspunukkannoor.org/api/v1/alumni/register', {
-             method: 'POST',
-             headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify({ fullName, passingYear, phoneNumber, email, location, occupation, memories })
-           });
-        */
-        
-        // Simulate API network delay
-        await new Promise(resolve => setTimeout(resolve, 800));
+        if (GOOGLE_SHEET_WEBHOOK_URL && GOOGLE_SHEET_WEBHOOK_URL.startsWith('http')) {
+          // Send directly to Google Sheets Webhook
+          await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          // Fallback simulation if webhook URL is not yet configured
+          await new Promise(resolve => setTimeout(resolve, 800));
+        }
 
         // Show Success Modal
         showSuccessModal(fullName, receiptId, passingYear);
         alumniForm.reset();
 
       } catch (err) {
-        alert('Error submitting registration. Please try again.');
+        console.error('Submission error:', err);
+        alert('Error submitting registration. Please check your internet connection and try again.');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
+        submitBtn.innerHTML = originalBtnHTML;
       }
     });
   }
@@ -83,9 +101,9 @@ function showSuccessModal(name, receiptId, year) {
   }
 }
 
-function closeModal() {
+window.closeModal = function() {
   const modal = document.getElementById('success-modal');
   if (modal) {
     modal.classList.remove('active');
   }
-}
+};

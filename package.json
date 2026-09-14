@@ -1,0 +1,26 @@
+{
+  "name": "upgs-punukkannoor",
+  "version": "1.0.0",
+  "description": "[![School](https://img.shields.io/badge/School-UPGS%20Punukkannoor-blue.svg)](https://github.com) [![Centenary](https://img.shields.io/badge/Jubilee-100%20Years%20(1926--2026)-gold.svg)](https://github.com) [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jithupeter-netizen/upgs-punukkannoor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jithupeter-netizen/upgs-punukkannoor/issues"
+  },
+  "homepage": "https://github.com/jithupeter-netizen/upgs-punukkannoor#readme",
+  "devDependencies": {
+    "vite": "^8.2.2"
+  }
+}

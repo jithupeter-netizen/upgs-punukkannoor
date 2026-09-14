@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
 </head>
 <body>
 
@@ -23,9 +29,6 @@
       </div>
       <div class="top-bar-actions">
         <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
-        <button class="lang-switch-btn" onclick="toggleLanguage()">
-          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
-        </button>
       </div>
     </div>
   </div>
@@ -34,10 +37,9 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="brand-logo">
-        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <img loading="lazy" src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
         <div class="brand-text">
           <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
-          <p data-i18n="school_tagline">Upper Primary Government School</p>
         </div>
       </a>
 
@@ -68,102 +70,205 @@
   </nav>
 
   <!-- Page Header -->
-  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 5rem 0 4.5rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral);">
-    <div class="container">
-      <span class="marquee-badge" style="background: var(--accent-coral); color: #ffffff; padding: 0.4rem 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 4.5rem 0 4rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral); position: relative; overflow: hidden;">
+    <div class="container" style="position: relative; z-index: 2;">
+      <span class="marquee-badge" style="background: var(--accent-coral); color: #ffffff; padding: 0.4rem 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
         <i class="fas fa-paper-plane"></i> <span>REACH OUT TO US</span>
       </span>
-      <h1 style="font-size: 3rem; font-weight: 800; color: #ffffff; margin-bottom: 1rem;">Get in Touch with Us</h1>
-      <p style="color: #cbd5e1; font-size: 1.2rem; max-width: 750px; margin: 0 auto;">We welcome your inquiries regarding school admissions, centenary sponsorship, and alumni activities.</p>
+      <h1 style="font-size: 2.85rem; font-weight: 800; color: #ffffff; margin-bottom: 0.75rem; font-family: var(--font-heading);">Get in Touch with Us</h1>
+      <p style="color: #cbd5e1; font-size: 1.15rem; max-width: 700px; margin: 0 auto; line-height: 1.6;">We welcome your inquiries regarding school admissions, centenary sponsorship, and alumni activities.</p>
     </div>
   </section>
 
-  <!-- Contact Grid & Form -->
-  <section style="padding: 5rem 0; background-color: #f8fafc;">
-    <div class="container grid-2">
+  <!-- Contact Section -->
+  <section class="contact-section-wrapper">
+    <div class="container contact-layout-grid">
       
-      <!-- Contact Details -->
+      <!-- Left Column: Contact Details & Map -->
       <div>
-        <div class="card" style="margin-bottom: 2rem;">
-          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem;">
-            <div class="card-icon" style="flex-shrink: 0;"><i class="fas fa-map-marker-alt"></i></div>
-            <div>
-              <h3>School Address</h3>
-              <p style="color: var(--text-secondary); margin-top: 0.25rem;">
-                <strong>UPGSchool Punukkonnoor</strong><br>
-                Alummoodu P.O.<br>
-                Kundara - 691577, Kollam, Kerala
+        <div class="contact-info-card">
+          <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.25rem;">Contact Information</h3>
+
+          <div class="contact-item-row">
+            <div class="contact-icon-box contact-icon-blue">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-item-details">
+              <h4>School Address</h4>
+              <p>
+                <strong>UPGSchool Punukkannoor</strong><br>
+                Unnimukk Alummoodu Rd, Kottamkara<br>
+                Alummoodu P.O., Kundara, Kollam - 691577, Kerala
               </p>
             </div>
           </div>
 
-          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem;">
-            <div class="card-icon" style="flex-shrink: 0;"><i class="fas fa-phone-alt"></i></div>
-            <div>
-              <h3>Phone & WhatsApp</h3>
-              <p style="color: var(--text-secondary); margin-top: 0.25rem;">
-                <a href="tel:9447135592" style="color: var(--accent-blue); font-weight: 700; text-decoration: none;">+91 9447135592</a><br>
-                WhatsApp: <a href="https://wa.me/919447135592" style="color: #059669; font-weight: 700; text-decoration: none;">+91 9447135592</a>
+          <div class="contact-item-row">
+            <div class="contact-icon-box contact-icon-emerald">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-item-details">
+              <h4>Phone & WhatsApp</h4>
+              <p>
+                <a href="tel:9447135592" style="font-weight: 700; color: var(--primary-navy);">+91 9447135592</a><br>
+                <a href="https://wa.me/919447135592" target="_blank" rel="noopener" style="color: #059669; font-weight: 700;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
               </p>
             </div>
           </div>
 
-          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem;">
-            <div class="card-icon" style="flex-shrink: 0;"><i class="fas fa-envelope"></i></div>
-            <div>
-              <h3>Official Email</h3>
-              <p style="color: var(--text-secondary); margin-top: 0.25rem;">
-                <a href="mailto:41660kundaraupgs@gmail.com" style="color: var(--accent-blue); font-weight: 600; text-decoration: none;">41660kundaraupgs@gmail.com</a>
+          <div class="contact-item-row">
+            <div class="contact-icon-box contact-icon-coral">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-item-details">
+              <h4>Official Email</h4>
+              <p>
+                <a href="mailto:41660kundaraupgs@gmail.com" style="font-weight: 600;">41660kundaraupgs@gmail.com</a>
               </p>
             </div>
           </div>
 
-          <div style="display: flex; gap: 1rem; align-items: flex-start;">
-            <div class="card-icon" style="flex-shrink: 0; background-color: #fce7f3; color: #db2777;"><i class="fab fa-instagram"></i></div>
-            <div>
-              <h3>Instagram Page</h3>
-              <p style="color: var(--text-secondary); margin-top: 0.25rem;">
-                <a href="https://www.instagram.com/upgschoolpunukkonnoor" target="_blank" rel="noopener" style="color: #db2777; font-weight: 700; text-decoration: none;">@upgschoolpunukkonnoor</a>
+          <div class="contact-item-row">
+            <div class="contact-icon-box contact-icon-pink">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <div class="contact-item-details">
+              <h4>Instagram Channel</h4>
+              <p>
+                <a href="https://www.instagram.com/upgschoolpunukkonnoor" target="_blank" rel="noopener" style="color: #db2777; font-weight: 700;">@upgschoolpunukkonnoor</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-item-row">
+            <div class="contact-icon-box contact-icon-gold">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-item-details">
+              <h4>Office Hours</h4>
+              <p>
+                Monday – Saturday: 9:00 AM – 4:30 PM<br>
+                <span style="font-size: 0.85rem; color: #94a3b8;">Closed on Sundays & Public Holidays</span>
               </p>
             </div>
           </div>
         </div>
 
         <!-- Google Map Embed -->
-        <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-divider);">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15777.671804245914!2d76.67104085!3d8.93382755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05fd4000000001%3A0x6b123456789abcdef!2sPerumpuzha%2C%20Kollam%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="280" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="contact-map-wrapper">
+          <div class="contact-map-header">
+            <span><i class="fas fa-location-arrow" style="color: var(--accent-coral); margin-right: 0.5rem;"></i> UPGS Punukkannoor Map</span>
+            <a href="https://maps.app.goo.gl/gxLNB7rLtEkL8Bmp8" target="_blank" rel="noopener" style="color: var(--accent-blue); text-decoration: none; font-size: 0.82rem; font-weight: 700;">Open in Google Maps <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i></a>
+          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.5612480507!2d76.6665525!3d8.9203165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05e2ebeea36b9f%3A0xd49553dd4eabb5e9!2sAlummoodu%20LP%26UP%20School!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" width="100%" height="270" style="border:0; display: block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
 
-      <!-- Contact Inquiry Form -->
+      <!-- Right Column: Stylish Contact Inquiry Form -->
       <div>
-        <div class="form-container">
-          <h2 style="font-size: 1.75rem; color: var(--primary-blue); margin-bottom: 1.5rem;">Send Us a Message</h2>
+        <div class="form-container-card">
+          <div class="form-card-header">
+            <span class="form-card-badge"><i class="fas fa-envelope-open-text"></i> Quick Contact</span>
+            <h2 class="form-card-title">Send Us a Message</h2>
+            <p class="form-card-desc">Have questions regarding admissions, centenary events, or school programs? Fill out the form and our administration will get back to you promptly.</p>
+          </div>
           
           <form onsubmit="event.preventDefault(); alert('Thank you for contacting UPGS Punukkannoor. We will reply shortly.'); this.reset();">
-            <div class="form-group">
-              <label class="form-label">Your Full Name</label>
-              <input type="text" class="form-control" placeholder="e.g. Anjali Nair" required>
+            
+            <!-- Row 1: Full Name & Email -->
+            <div class="form-grid-row">
+              <div>
+                <label class="form-custom-label">
+                  <span>Full Name</span>
+                  <span class="req">*</span>
+                </label>
+                <div class="input-icon-wrapper">
+                  <i class="fas fa-user input-icon"></i>
+                  <input type="text" class="form-custom-input" placeholder="e.g. Anjali Nair" required>
+                </div>
+              </div>
+
+              <div>
+                <label class="form-custom-label">
+                  <span>Email Address</span>
+                  <span class="req">*</span>
+                </label>
+                <div class="input-icon-wrapper">
+                  <i class="fas fa-envelope input-icon"></i>
+                  <input type="email" class="form-custom-input" placeholder="e.g. anjali@example.com" required>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">Phone Number / Email</label>
-              <input type="text" class="form-control" placeholder="e.g. +91 9876543210 or email@domain.com" required>
+            <!-- Row 2: Phone & Category -->
+            <div class="form-grid-row">
+              <div>
+                <label class="form-custom-label">
+                  <span>Phone / WhatsApp</span>
+                  <span class="req">*</span>
+                </label>
+                <div class="input-icon-wrapper">
+                  <i class="fas fa-phone-alt input-icon"></i>
+                  <input type="tel" class="form-custom-input" placeholder="e.g. +91 9876543210" required>
+                </div>
+              </div>
+
+              <div>
+                <label class="form-custom-label">
+                  <span>Inquiry Type</span>
+                  <span class="req">*</span>
+                </label>
+                <div class="input-icon-wrapper">
+                  <i class="fas fa-tag input-icon"></i>
+                  <select class="form-custom-select" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="admissions">New Student Admissions (Class 1-7)</option>
+                    <option value="centenary">100th Centenary Celebration 2026</option>
+                    <option value="alumni">Alumni & PTA Matters</option>
+                    <option value="academics">Academic & Smart Classroom</option>
+                    <option value="general">General Inquiries & Feedback</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">Subject</label>
-              <input type="text" class="form-control" placeholder="e.g. Admission Inquiry / Centenary Event">
+            <!-- Subject Field -->
+            <div class="form-field-group">
+              <label class="form-custom-label">
+                <span>Subject</span>
+                <span class="req">*</span>
+              </label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-heading input-icon"></i>
+                <input type="text" class="form-custom-input" placeholder="e.g. Inquiry regarding Class 5 Admission & Documents" required>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">Your Message</label>
-              <textarea class="form-control" placeholder="Write your message here..."></textarea>
+            <!-- Message Field -->
+            <div class="form-field-group">
+              <label class="form-custom-label">
+                <span>Your Message</span>
+                <span class="req">*</span>
+              </label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-comment-dots input-icon" style="top: 1.25rem;"></i>
+                <textarea class="form-custom-textarea" placeholder="Please write your detailed message or questions here..." required></textarea>
+              </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem;">
-              <i class="fas fa-paper-plane"></i> Send Message
-            </button>
+            <!-- Submit Button & Note -->
+            <div class="form-action-row">
+              <button type="submit" class="form-stylish-btn">
+                <span>Send Message</span>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+              
+              <div class="form-security-note">
+                <i class="fas fa-shield-check"></i>
+                <span>Direct to UPGS School Administration • Prompt Response</span>
+              </div>
+            </div>
+
           </form>
         </div>
       </div>
@@ -213,7 +318,6 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

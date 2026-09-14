@@ -3,15 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UPGS Punukkannoor - 100th Centenary Jubilee | Upper Primary Government School</title>
+  <title>UPGS Punukkonnoor - 100th Centenary Jubilee | Shaping Young Minds</title>
   <meta name="description" content="Welcome to UPGS Punukkannoor. Minimalist Editorial design celebrating 100 Years of Educational Excellence (1926 - 2026). Digital Classrooms, 360 Virtual Tour, Alumni Network.">
   
+  
+  <!-- Preload critical fonts and hero image -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" as="style">
+  <link rel="preload" href="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80" as="image">
+
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
 </head>
 <body>
 
@@ -26,9 +37,6 @@
       </div>
       <div style="display: flex; align-items: center; gap: 1.5rem;">
         <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
-        <button class="lang-switch-btn" onclick="toggleLanguage()">
-          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
-        </button>
       </div>
     </div>
   </header>
@@ -37,10 +45,10 @@
   <div class="navbar-wrapper">
     <nav class="floating-navbar">
       <a href="index.html" class="brand-identity">
-        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <img fetchpriority="high" src="images/UPGS LOGO.svg" alt="UPGS Punukkonnoor" class="brand-logo-img">
         <div>
-          <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
-          <p data-i18n="school_tagline">Upper Primary Government School</p>
+          <h1 data-i18n="school_name">UPGS Punukkonnoor</h1>
+          <p data-i18n="school_tagline">Shaping Young Minds</p>
         </div>
       </a>
 
@@ -99,10 +107,7 @@
               <span>വിദ്യ കൊണ്ട് പ്രബുദ്ധരാവുക • Enlightenment through Knowledge</span>
             </div>
 
-            <div class="pill-badge">
-              <img src="images/upgs_centenary_badge.webp" alt="100th Year" class="centenary-badge-img">
-              <span data-i18n="hero_badge">100 Years Legacy (1926 - 2026)</span>
-            </div>
+            
 
             <h1>
               <span data-i18n="hero_title_1">Nurturing Minds, Shaping Futures for a </span><br>
@@ -115,30 +120,22 @@
               <a href="alumni.html" class="btn-pill-navy">
                 <i class="fas fa-user-graduate"></i> <span data-i18n="hero_btn_alumni">Register as Alumni</span>
               </a>
-              <a href="virtual-tour.html" class="btn-pill-outline">
-                <i class="fas fa-vr-cardboard"></i> <span data-i18n="hero_btn_explore">Explore Campus 360°</span>
-              </a>
+              
             </div>
           </div>
 
           <div class="hero-media-wrapper">
-            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80" alt="UPGS Punukkannoor Primary School" class="hero-media-img">
+            <img fetchpriority="high"  fetchpriority="high"  fetchpriority="high"  fetchpriority="high"  fetchpriority="high"  fetchpriority="high"  fetchpriority="high"  src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80" alt="UPGS Punukkannoor Primary School" class="hero-media-img">
 
-            <div class="floating-stat-card top-left">
-              <img src="images/upgs_centenary_badge.webp" alt="100th Centenary" style="height: 44px; width: auto; object-fit: contain;">
+            <div class="floating-stat-card bottom-right">
+              <img loading="lazy"  src="images/upgs_centenary_badge.webp" alt="100th Centenary" style="height: 44px; width: auto; object-fit: contain;">
               <div class="stat-text">
                 <strong>100 Years</strong>
                 <span>1926 - 2026 Jubilee</span>
               </div>
             </div>
 
-            <div class="hero-book-widget" id="hero-flip-book" title="Click to interact with Centenary Book">
-              <div class="mini-book-spine"><i class="fas fa-book-reader"></i></div>
-              <div class="book-widget-text">
-                <strong>100 Years of Learning</strong>
-                <span>1926 – 2026 Centenary Archive ✦</span>
-              </div>
-            </div>
+            
           </div>
         </div>
 
@@ -150,10 +147,7 @@
               <span>KITE Kerala Hi-Tech Education Initiative</span>
             </div>
 
-            <div class="pill-badge" style="background-color: #e0f2fe; color: #0284c7; border-color: #bae6fd;">
-              <i class="fas fa-laptop-code"></i>
-              <span>Kerala KITE Digital School</span>
-            </div>
+            
 
             <h1>
               <span>Empowering Students with </span><br>
@@ -166,16 +160,14 @@
               <a href="virtual-tour.html" class="btn-pill-navy" style="background-color: #0284c7; border-color: #0284c7;">
                 <i class="fas fa-vr-cardboard"></i> <span>Watch 360° Smart Class</span>
               </a>
-              <a href="about.html#curriculum" class="btn-pill-outline">
-                <i class="fas fa-microchip"></i> <span>Little Kites Program</span>
-              </a>
+              
             </div>
           </div>
 
           <div class="hero-media-wrapper">
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Hi-Tech Computer Lab" class="hero-media-img">
+            <img loading="lazy"  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Hi-Tech Computer Lab" class="hero-media-img">
 
-            <div class="floating-stat-card top-left" style="border-color: #0284c7;">
+            <div class="floating-stat-card bottom-right" style="border-color: #0284c7;">
               <div class="stat-icon-circle" style="background-color: #e0f2fe; color: #0284c7;"><i class="fas fa-desktop"></i></div>
               <div class="stat-text">
                 <strong>100% Digital</strong>
@@ -183,13 +175,7 @@
               </div>
             </div>
 
-            <div class="hero-book-widget" style="border-color: #bae6fd;">
-              <div class="mini-book-spine" style="background: linear-gradient(135deg, #0284c7, #38bdf8);"><i class="fas fa-laptop-code"></i></div>
-              <div class="book-widget-text">
-                <strong>Little Kites IT Lab</strong>
-                <span>Robotics & Coding ✦</span>
-              </div>
-            </div>
+            
           </div>
         </div>
 
@@ -201,10 +187,7 @@
               <span>Holistic Student Development & Sports</span>
             </div>
 
-            <div class="pill-badge" style="background-color: #fef3c7; color: #d97706; border-color: #fde68a;">
-              <i class="fas fa-running"></i>
-              <span>Sports, Arts & Eco Club</span>
-            </div>
+            
 
             <h1>
               <span>Fostering Excellence in </span><br>
@@ -217,14 +200,12 @@
               <a href="gallery.html" class="btn-pill-navy" style="background-color: #d97706; border-color: #d97706;">
                 <i class="fas fa-images"></i> <span>View Event Gallery</span>
               </a>
-              <a href="contact.html" class="btn-pill-outline">
-                <i class="fas fa-info-circle"></i> <span>School Information</span>
-              </a>
+              
             </div>
           </div>
 
           <div class="hero-media-wrapper">
-            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80" alt="Cultural Arts Festival" class="hero-media-img">
+            <img loading="lazy"  src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80" alt="Cultural Arts Festival" class="hero-media-img">
 
             <div class="floating-stat-card bottom-right" style="border-color: #d97706;">
               <div class="stat-icon-circle" style="background-color: #fef3c7; color: #d97706;"><i class="fas fa-trophy"></i></div>
@@ -234,13 +215,7 @@
               </div>
             </div>
 
-            <div class="hero-book-widget" style="border-color: #fde68a;">
-              <div class="mini-book-spine" style="background: linear-gradient(135deg, #d97706, #fbbf24);"><i class="fas fa-trophy"></i></div>
-              <div class="book-widget-text">
-                <strong>Arts & Sports Crest</strong>
-                <span>Cubs & Bulbuls, Eco Club ✦</span>
-              </div>
-            </div>
+            
           </div>
         </div>
 
@@ -249,9 +224,9 @@
       <!-- Interactive Controls Bar -->
       <div class="hero-controls-bar">
         <div class="hero-dots">
-          <div class="hero-dot active" data-slide="0"></div>
-          <div class="hero-dot" data-slide="1"></div>
-          <div class="hero-dot" data-slide="2"></div>
+          <div class="hero-dot active" data-slide="0"><div class="dot-progress"></div></div>
+          <div class="hero-dot" data-slide="1"><div class="dot-progress"></div></div>
+          <div class="hero-dot" data-slide="2"><div class="dot-progress"></div></div>
         </div>
 
         <div class="hero-nav-arrows">
@@ -260,36 +235,98 @@
         </div>
       </div>
 
-      <div class="hero-timer-progress-wrap">
-        <div class="hero-timer-progress-bar" id="hero-progress-bar"></div>
-      </div>
+      
 
     </div>
   </section>
 
-  <!-- Clean Quick Statistics Counter Strip -->
-  <section style="padding: 4rem 0; background-color: var(--bg-slate); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+  <!-- Modern Dynamic Statistics Counter Showcase (Centenary Royal Blue Luxury Glass Edition) -->
+  <section class="stats-banner" id="stats-section">
+    <!-- Atmospheric Floating Centenary Particles -->
+    <div class="stats-particles" aria-hidden="true">
+      <span class="particle p-1"></span>
+      <span class="particle p-2"></span>
+      <span class="particle p-3"></span>
+      <span class="particle p-4"></span>
+      <span class="particle p-5"></span>
+      <span class="particle p-6"></span>
+    </div>
+
+    <!-- Atmospheric Rotating Background Centenary Badge Watermark -->
+    <div class="stats-watermark" aria-hidden="true">
+      <img src="images/upgs_centenary_badge.webp" alt="" class="stats-watermark-img" loading="lazy">
+    </div>
+
     <div class="container">
-      <div class="grid-4">
-        <div style="text-align: center;">
-          <span style="font-size: 3rem; font-weight: 900; color: var(--primary-navy); display: block;" class="stat-number" data-target="100" data-suffix="+">100+</span>
-          <span style="font-weight: 700; color: #64748b; font-size: 0.95rem; text-transform: uppercase;" data-i18n="hero_stat_1">Years of Trust</span>
+      <!-- Centenary Jubilee Badge Crest & Title -->
+      <div class="stats-centenary-header">
+        <div class="stats-centenary-badge-wrap">
+          <div class="stats-badge-halo"></div>
+          <img src="images/upgs_centenary_badge.webp" alt="UPGS 100 Years Centenary Celebrations (1926-2026)" class="stats-centenary-badge-img">
+        </div>
+        <div class="stats-centenary-info">
+          <span class="stats-centenary-pill">
+            <i class="fas fa-award" style="color: #fbbf24;"></i> 100TH CENTENARY JUBILEE (1926 – 2026)
+          </span>
+          <h2 class="stats-centenary-title">A Century of Educational Excellence</h2>
+          <p class="stats-centenary-subtitle">Celebrating 100 glorious years of empowering young minds, academic distinction, and community leadership.</p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        
+        <!-- Stat 1: 100+ Years - A Legacy of Excellence -->
+        <div class="stat-card-modern stat-card-gold" data-card="gold">
+          <div class="card-shimmer"></div>
+          <div class="stat-icon-badge">
+            <i class="fas fa-landmark"></i>
+          </div>
+          <div class="stat-number-wrapper">
+            <span class="stat-number" data-target="100" data-suffix="+">100+</span>
+            <span class="stat-unit">Years</span>
+          </div>
+          <p class="stat-tagline">A Legacy of Excellence</p>
         </div>
 
-        <div style="text-align: center;">
-          <span style="font-size: 3rem; font-weight: 900; color: var(--accent-blue); display: block;" class="stat-number" data-target="450" data-suffix="+">450+</span>
-          <span style="font-weight: 700; color: #64748b; font-size: 0.95rem; text-transform: uppercase;" data-i18n="hero_stat_2">Happy Students</span>
+        <!-- Stat 2: 1000+ Students - Where Young Minds Flourish -->
+        <div class="stat-card-modern stat-card-blue" data-card="blue">
+          <div class="card-shimmer"></div>
+          <div class="stat-icon-badge">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+          <div class="stat-number-wrapper">
+            <span class="stat-number" data-target="1000" data-suffix="+">1000+</span>
+            <span class="stat-unit">Students</span>
+          </div>
+          <p class="stat-tagline">Where Young Minds Flourish</p>
         </div>
 
-        <div style="text-align: center;">
-          <span style="font-size: 3rem; font-weight: 900; color: var(--primary-navy); display: block;" class="stat-number" data-target="22" data-suffix="">22</span>
-          <span style="font-weight: 700; color: #64748b; font-size: 0.95rem; text-transform: uppercase;" data-i18n="hero_stat_3">Expert Teachers</span>
+        <!-- Stat 3: 22 Educators - Passionate Educators -->
+        <div class="stat-card-modern stat-card-emerald" data-card="emerald">
+          <div class="card-shimmer"></div>
+          <div class="stat-icon-badge">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="stat-number-wrapper">
+            <span class="stat-number" data-target="22" data-suffix="">22</span>
+            <span class="stat-unit">Educators</span>
+          </div>
+          <p class="stat-tagline">Passionate Educators</p>
         </div>
 
-        <div style="text-align: center;">
-          <span style="font-size: 3rem; font-weight: 900; color: var(--centenary-gold); display: block;" class="stat-number" data-target="5000" data-suffix="+">5000+</span>
-          <span style="font-weight: 700; color: #64748b; font-size: 0.95rem; text-transform: uppercase;" data-i18n="hero_stat_4">Global Alumni</span>
+        <!-- Stat 4: 50K+ Alumni - Our Alumni, Our Legacy -->
+        <div class="stat-card-modern stat-card-purple" data-card="purple">
+          <div class="card-shimmer"></div>
+          <div class="stat-icon-badge">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-number-wrapper">
+            <span class="stat-number" data-target="50" data-suffix="K+">50K+</span>
+            <span class="stat-unit">Alumni</span>
+          </div>
+          <p class="stat-tagline">Our Alumni, Our Legacy</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -299,7 +336,7 @@
     <div class="container">
       <div class="welcome-section-grid">
         <div class="welcome-image-wrapper">
-          <img src="images/upgs_school_building.jpg" alt="UPGS Punukkannoor School Campus" class="welcome-image">
+          <img loading="lazy"  src="images/upgs_school_building.jpg" alt="UPGS Punukkannoor School Campus" class="welcome-image">
           <div class="welcome-image-badge">
             <i class="fas fa-landmark"></i>
             <span>Est. 1926</span>
@@ -310,6 +347,50 @@
           <span class="tag" data-i18n="welcome_subtitle">A CENTURY OF EDUCATIONAL EXCELLENCE</span>
           <h2 data-i18n="welcome_title">Welcome to UPGS Punukkannoor</h2>
           <p data-i18n="welcome_text">Established in 1926, UPGS Punukkannoor has proudly served generations of learners for a century, standing as a beacon of academic excellence, strong values, and community spirit. We blend a rich educational heritage with modern learning approaches to nurture curiosity, creativity, discipline, and confidence in every child. As we celebrate 100 years of learning and growth, we remain committed to inspiring young minds and shaping a brighter future for generations to come.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kindergarten Showcase Section (Dark Blue Background) -->
+  <section class="kindergarten-section" id="kindergarten-section">
+    <div class="container">
+      <div class="kindergarten-grid">
+        <!-- Left Column: Kindergarten Classroom Image -->
+        <div class="kindergarten-image-wrapper">
+          <img loading="lazy" src="images/upgs_kindergarten.jpg" alt="UPGS Kindergarten Classroom" class="kindergarten-image">
+          <div class="kindergarten-image-badge">
+            <i class="fas fa-shapes"></i>
+            <span>Play & Learn Wing</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Kindergarten Overview & Highlights -->
+        <div class="kindergarten-text-content">
+          <span class="kg-tag">EARLY CHILDHOOD EDUCATION & CARE</span>
+          <h2>Joyful Learning at UPGS Kindergarten</h2>
+          <p>
+            At UPGS Kindergarten, we provide a warm, nurturing, and joyful first step into education. Our activity-based curriculum blends playful exploration with foundational language, numeracy, and creative expression. With child-friendly digital smart tools, sensory play areas, and dedicated caring educators, we inspire wonder and build confidence in our youngest learners, laying a strong foundation for lifelong learning.
+          </p>
+
+          <div class="kindergarten-features-list">
+            <div class="kg-feature-item">
+              <i class="fas fa-puzzle-piece"></i>
+              <span>Activity-Based Learning</span>
+            </div>
+            <div class="kg-feature-item">
+              <i class="fas fa-heart"></i>
+              <span>Safe & Caring Environment</span>
+            </div>
+            <div class="kg-feature-item">
+              <i class="fas fa-palette"></i>
+              <span>Creative Arts & Rhymes</span>
+            </div>
+            <div class="kg-feature-item">
+              <i class="fas fa-child"></i>
+              <span>Holistic Child Development</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -352,6 +433,75 @@
     </div>
   </section>
 
+  <!-- Founders & Founding Visionaries Section -->
+  <section class="founders-section" id="founders">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">
+          <i class="fas fa-monument"></i> CENTENARY HERITAGE
+        </span>
+        <h2>Honouring Our Founders</h2>
+        <p>With deep reverence and gratitude, we honour the founding pillars and visionary managers whose dedication, sacrifice, and timeless vision built and shaped UPGS Punukkannoor through a century of excellence (1926–2026).</p>
+      </div>
+
+      <div class="founders-grid">
+        <!-- Founder 1: Sri. Padmanabha Pillai -->
+        <div class="founder-card founder-primary">
+          <div class="founder-img-wrapper">
+            <img loading="lazy" src="images/founders/Padmanabha%20Pillai.webp" alt="Founder Sri. Padmanabha Pillai" class="founder-img">
+            <div class="founder-badge-floating">
+              <i class="fas fa-crown"></i> Founder
+            </div>
+          </div>
+          <div class="founder-info">
+            <span class="founder-role-title">School Founder (1926)</span>
+            <h3 class="founder-name">Sri. Padmanabha Pillai</h3>
+            <p class="founder-desc">The revered founding visionary who established UPGS Punukkannoor in 1926, dedicating his life to bring education, literacy, and empowerment to our rural community.</p>
+            <div class="founder-honor-tag">
+              <i class="fas fa-award" style="color: var(--accent-gold);"></i> Founding Visionary
+            </div>
+          </div>
+        </div>
+
+        <!-- Founder 2: Sri. Balan Pilla -->
+        <div class="founder-card">
+          <div class="founder-img-wrapper">
+            <img loading="lazy" src="images/founders/Balan%20Pilla.webp" alt="Sri. Balan Pilla" class="founder-img">
+            <div class="founder-badge-floating">
+              <i class="fas fa-award"></i> Former Manager
+            </div>
+          </div>
+          <div class="founder-info">
+            <span class="founder-role-title">Pioneering Leadership</span>
+            <h3 class="founder-name">Sri. Balan Pilla</h3>
+            <p class="founder-desc">Carried the founding mission forward with exceptional commitment, fostering educational advancement, discipline, and community trust across formative eras.</p>
+            <div class="founder-honor-tag">
+              <i class="fas fa-certificate" style="color: var(--accent-blue);"></i> Guiding Pillar
+            </div>
+          </div>
+        </div>
+
+        <!-- Founder 3: Sri. Muraleedharan Pillai -->
+        <div class="founder-card">
+          <div class="founder-img-wrapper">
+            <img loading="lazy" src="images/founders/Muraleedharan%20Pillai.webp" alt="Sri. Muraleedharan Pillai" class="founder-img">
+            <div class="founder-badge-floating">
+              <i class="fas fa-award"></i> Former Manager
+            </div>
+          </div>
+          <div class="founder-info">
+            <span class="founder-role-title">Former Manager</span>
+            <h3 class="founder-name">Sri. Muraleedharan Pillai</h3>
+            <p class="founder-desc">Devoted himself to institutional modernization, pioneering infrastructure growth and strengthening academic excellence that paves our centenary path.</p>
+            <div class="founder-honor-tag">
+              <i class="fas fa-certificate" style="color: var(--accent-coral);"></i> Enduring Legacy
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Leadership Messages Section (Headmaster & Director Messages) -->
   <section class="leadership-messages-section" style="padding: 5.5rem 0; background-color: var(--bg-slate);">
     <div class="container">
@@ -364,7 +514,7 @@
         <!-- Headmaster Card -->
         <div class="executive-leader-card">
           <div class="leader-photo-box">
-            <img src="images/headmaster.jpg" alt="Headmaster" class="leader-photo-img">
+            <img loading="lazy"  src="images/headmaster.jpg" alt="Headmaster" class="leader-photo-img">
             <div class="leader-photo-badge" data-i18n="headmaster_role">Headmaster's Message</div>
           </div>
           <div class="leader-details-box">
@@ -382,7 +532,7 @@
         <!-- Director / Manager Card -->
         <div class="executive-leader-card">
           <div class="leader-photo-box">
-            <img src="images/director.jpg" alt="Director / Manager" class="leader-photo-img">
+            <img loading="lazy"  src="images/director.jpg" alt="Director / Manager" class="leader-photo-img">
             <div class="leader-photo-badge manager-badge" data-i18n="director_role">Director's Message</div>
           </div>
           <div class="leader-details-box">
@@ -463,6 +613,7 @@
   <script src="js/main.js"></script>
   <script src="js/hero-slider.js"></script>
   <script src="js/hero-education-anim.js"></script>
+  <script src="js/owl-mascot.js" defer></script>
 
 </body>
 </html>

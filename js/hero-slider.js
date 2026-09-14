@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const dots = document.querySelectorAll('.hero-dot');
   const prevBtn = document.getElementById('hero-prev-btn');
   const nextBtn = document.getElementById('hero-next-btn');
-  const progressBar = document.getElementById('hero-progress-bar');
   
   if (!slides.length) return;
 
@@ -14,13 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const autoPlayDelay = 6000; // 6 seconds per slide
 
   function resetProgressBar() {
-    if (!progressBar) return;
-    progressBar.style.transition = 'none';
-    progressBar.style.width = '0%';
-    setTimeout(() => {
-      progressBar.style.transition = `width ${autoPlayDelay}ms linear`;
-      progressBar.style.width = '100%';
-    }, 30);
+    const allProgress = document.querySelectorAll('.dot-progress');
+    allProgress.forEach(p => {
+      p.style.transition = 'none';
+      p.style.width = '0%';
+    });
+    
+    const activeProgress = dots[currentSlide].querySelector('.dot-progress');
+    if (activeProgress) {
+      setTimeout(() => {
+        activeProgress.style.transition = `width ${autoPlayDelay}ms linear`;
+        activeProgress.style.width = '100%';
+      }, 30);
+    }
   }
 
   function showSlide(index) {
@@ -57,8 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(slideInterval);
       slideInterval = null;
     }
-    if (progressBar) {
-      progressBar.style.transition = 'none';
+    const activeProgress = dots[currentSlide].querySelector('.dot-progress');
+    if (activeProgress) {
+      activeProgress.style.transition = 'none';
     }
   }
 
@@ -84,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Pause on hover
+  // Pause on hover (only for devices that support hover, e.g. desktop)
   const heroContainer = document.querySelector('.minimalist-hero-section');
-  if (heroContainer) {
+  if (heroContainer && window.matchMedia('(hover: hover)').matches) {
     heroContainer.addEventListener('mouseenter', stopAutoPlay);
     heroContainer.addEventListener('mouseleave', startAutoPlay);
   }

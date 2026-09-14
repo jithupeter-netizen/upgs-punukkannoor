@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPGS Punukkannoor - Owl Mascot Flying Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 10% 20%, #0d2149 0%, transparent 45%),
+                  radial-gradient(circle at 90% 80%, rgba(217, 119, 6, 0.15) 0%, transparent 45%),
+                  linear-gradient(135deg, #061329 0%, #0a192f 50%, #0f172a 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #ffffff;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .top-bar {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .back-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.6rem 1.25rem;
+      border-radius: 50px;
+      transition: all 0.25s ease;
+    }
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      transform: translateX(-3px);
+    }
+    .badge {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .header-content {
+      text-align: center;
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin: 0.75rem 0;
+      background: linear-gradient(135deg, #ffffff 0%, #fef08a 60%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* Full Flight Sky Arena */
+    .flight-arena {
+      width: 100%;
+      max-width: 1100px;
+      height: 480px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 0 100px rgba(10, 25, 47, 0.8);
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+    }
+    .flight-arena::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f59e0b, #38bdf8, #f59e0b);
+    }
+    /* Stars and clouds in the arena */
+    .arena-clouds {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.25;
+      background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.2) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 60%, rgba(245, 158, 11, 0.15) 0%, transparent 45%);
+    }
+
+    /* Perch Platform in Arena */
+    .perch-platform {
+      position: absolute;
+      bottom: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+    }
+    .flight-mode .perch-platform {
+      opacity: 0.3;
+      transform: translateX(-50%) translateY(30px) scale(0.9);
+    }
+
+    /* Flying Owl Container */
+    .owl-actor {
+      position: absolute;
+      width: 260px;
+      height: 240px;
+      top: 130px;
+      left: calc(50% - 130px);
+      z-index: 10;
+      transition: top 0.4s ease-out, left 0.4s ease-out, transform 0.3s ease;
+      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+    }
+
+    /* Gliding Hover effect when in air */
+    .flight-mode .owl-actor {
+      animation: airHover 2.2s infinite ease-in-out;
+    }
+    @keyframes airHover {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      30% {
+        transform: translateY(-22px) rotate(-3deg);
+      }
+      70% {
+        transform: translateY(-8px) rotate(3deg);
+      }
+    }
+
+    /* Wings - Resting state vs Flying state */
+    .spread-wing {
+      display: none;
+    }
+    .resting-wing {
+      display: block;
+    }
+
+    /* When Flight Mode is ACTIVE */
+    .flight-mode .resting-wing {
+      display: none;
+    }
+    .flight-mode .spread-wing {
+      display: block;
+    }
+
+    /* Left Spread Wing Flapping */
+    .flight-mode #spreadWingLeft {
+      transform-origin: 85px 125px;
+      animation: flapLeftWing 0.32s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    }
+    @keyframes flapLeftWing {
+      0% {
+        transform: rotate(28deg) scaleY(0.75);
+      }
+      100% {
+        transform: rotate(-38deg) scaleY(1.08);
+      }
+    }
+
+    /* Right Spread Wing Flapping */
+    .flight-mode #spreadWingRight {
+      transform-origin: 175px 125px;
+      animation: flapRightWing 0.32s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    }
+    @keyframes flapRightWing {
+      0% {
+        transform: rotate(-28deg) scaleY(0.75);
+      }
+      100% {
+        transform: rotate(38deg) scaleY(1.08);
+      }
+    }
+
+    /* Tucked Feet in flight */
+    .flight-mode .owl-feet {
+      transform: translateY(-10px) scale(0.85);
+      transition: transform 0.3s ease;
+    }
+
+    /* Flight Controls & Mode Selector */
+    .controls-panel {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .btn-ctrl {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.85rem 1.75rem;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .btn-ctrl:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
+    }
+    .btn-ctrl.btn-gold {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4);
+    }
+    .btn-ctrl.btn-gold:hover {
+      box-shadow: 0 12px 30px rgba(217, 119, 6, 0.6);
+    }
+    .btn-ctrl.btn-coral {
+      background: linear-gradient(135deg, #ff4e31 0%, #e11d48 100%);
+      box-shadow: 0 8px 25px rgba(255, 78, 49, 0.4);
+    }
+    .btn-ctrl.active {
+      outline: 3px solid #fef08a;
+    }
+
+    /* Speech Bubble */
+    .speech-bubble {
+      position: absolute;
+      top: -35px;
+      right: -40px;
+      background: #ffffff;
+      color: #0a192f;
+      padding: 0.6rem 1.15rem;
+      border-radius: 16px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      white-space: nowrap;
+      z-index: 20;
+      animation: bubbleBob 2.5s infinite ease-in-out;
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 24px;
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      transform: rotate(45deg);
+    }
+    @keyframes bubbleBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Arena guidance instruction */
+    .instruction-bar {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50px;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .instruction-bar i {
+      color: #fbbf24;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body id="pageBody">
+
+  <div class="top-bar">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to School Home</a>
+    <span class="badge"><i class="fas fa-feather-alt"></i> Flight & Eye-Tracking System</span>
+  </div>
+
+  <div class="header-content">
+    <span class="badge"><i class="fas fa-dove"></i> Wide Wings Demonstration</span>
+    <h1>Watch the Owl Take Flight!</h1>
+    <p class="subtitle">Now with expansive, layered golden-navy feather wings. Toggle flight mode or click anywhere in the sky arena to command the owl to fly there!</p>
+  </div>
+
+  <!-- Interactive Flight Arena -->
+  <div class="flight-arena" id="arena">
+    <div class="arena-clouds"></div>
+
+    <!-- Perch Platform (Books & Wooden Branch) -->
+    <div class="perch-platform" id="perchPlatform">
+      <svg width="220" height="70" viewBox="0 0 220 70" fill="none">
+        <!-- 100 Years Vintage Book -->
+        <rect x="25" y="32" width="170" height="26" rx="4" fill="#581c1c" stroke="#f59e0b" stroke-width="1.5"/>
+        <rect x="20" y="35" width="180" height="20" rx="3" fill="#7f1d1d"/>
+        <line x1="28" y1="36" x2="28" y2="54" stroke="#fbbf24" stroke-width="2"/>
+        <line x1="34" y1="36" x2="34" y2="54" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="110" y="49" fill="#fde68a" font-family="'Outfit', sans-serif" font-size="11" font-weight="900" text-anchor="middle" letter-spacing="1">UPGS • 100 YEARS (1926-2026)</text>
+
+        <!-- Wooden Branch -->
+        <path d="M 10 24 C 50 16, 170 16, 210 24 C 215 25, 215 33, 210 34 C 170 28, 50 28, 10 34 C 5 33, 5 25, 10 24 Z" fill="#854d0e"/>
+        <!-- Fresh green leaves -->
+        <path d="M 35 22 C 22 8, 12 14, 18 20" stroke="#15803d" stroke-width="2.5" fill="none"/>
+        <ellipse cx="14" cy="12" rx="7" ry="4" fill="#22c55e" transform="rotate(-35 14 12)"/>
+        <ellipse cx="25" cy="11" rx="6" ry="3.5" fill="#16a34a" transform="rotate(25 25 11)"/>
+      </svg>
+    </div>
+
+    <!-- Owl Actor with Full Articulation (Width 260 for wide wings) -->
+    <div class="owl-actor" id="owlActor">
+      <div class="speech-bubble" id="speechBubble">Hoot! Ready for takeoff! 🎓</div>
+
+      <svg width="260" height="240" viewBox="0 0 260 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e3a8a"/>
+            <stop offset="60%" stop-color="#0f244a"/>
+            <stop offset="100%" stop-color="#0a192f"/>
+          </linearGradient>
+          <linearGradient id="bellyCream" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fffbeb"/>
+            <stop offset="60%" stop-color="#fef3c7"/>
+            <stop offset="100%" stop-color="#fde68a"/>
+          </linearGradient>
+          <linearGradient id="goldFeather" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fef08a"/>
+            <stop offset="50%" stop-color="#fbbf24"/>
+            <stop offset="100%" stop-color="#d97706"/>
+          </linearGradient>
+          <linearGradient id="wingNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e3a8a"/>
+            <stop offset="100%" stop-color="#0c1d3c"/>
+          </linearGradient>
+        </defs>
+
+        <!-- WIDE SPREAD WING - LEFT (FLIGHT MODE) -->
+        <g id="spreadWingLeft" class="spread-wing">
+          <!-- Main Wing Canvas -->
+          <path d="M 85 125 C 60 110, 15 90, 5 70 C -2 60, 2 52, 12 55 C 25 58, 45 75, 55 70 C 65 65, 30 45, 20 38 C 15 32, 22 25, 32 28 C 48 35, 70 65, 80 62 C 72 45, 55 25, 50 18 C 45 12, 54 6, 62 10 C 78 20, 95 65, 100 85 C 105 105, 95 120, 85 125 Z" 
+                fill="url(#wingNavy)" stroke="#3b82f6" stroke-width="1.5"/>
+          <!-- Golden feather tip accents -->
+          <path d="M 12 55 C 22 58, 38 72, 48 70" stroke="url(#goldFeather)" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 32 28 C 44 35, 62 60, 70 58" stroke="url(#goldFeather)" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 62 10 C 72 20, 88 55, 92 68" stroke="url(#goldFeather)" stroke-width="4" stroke-linecap="round"/>
+        </g>
+
+        <!-- WIDE SPREAD WING - RIGHT (FLIGHT MODE) -->
+        <g id="spreadWingRight" class="spread-wing">
+          <!-- Main Wing Canvas -->
+          <path d="M 175 125 C 200 110, 245 90, 255 70 C 262 60, 258 52, 248 55 C 235 58, 215 75, 205 70 C 195 65, 230 45, 240 38 C 245 32, 238 25, 228 28 C 212 35, 190 65, 180 62 C 188 45, 205 25, 210 18 C 215 12, 206 6, 198 10 C 182 20, 165 65, 160 85 C 155 105, 165 120, 175 125 Z" 
+                fill="url(#wingNavy)" stroke="#3b82f6" stroke-width="1.5"/>
+          <!-- Golden feather tip accents -->
+          <path d="M 248 55 C 238 58, 222 72, 212 70" stroke="url(#goldFeather)" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 228 28 C 216 35, 198 60, 190 58" stroke="url(#goldFeather)" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 198 10 C 188 20, 172 55, 168 68" stroke="url(#goldFeather)" stroke-width="4" stroke-linecap="round"/>
+        </g>
+
+        <!-- Tail Feathers -->
+        <path d="M 115 180 L 130 215 L 145 180 Z" fill="#091427"/>
+        <path d="M 122 180 L 130 210 L 138 180 Z" fill="#f59e0b" opacity="0.6"/>
+
+        <!-- FOLDED WINGS (RESTING MODE) -->
+        <!-- Left Resting Wing with Bright Golden Feather Ribs -->
+        <g id="restingWingLeft" class="resting-wing">
+          <path d="M 85 110 C 60 125, 52 165, 80 185 C 92 170, 96 140, 85 110 Z" fill="#132752" stroke="#2563eb" stroke-width="1.5"/>
+          <path d="M 62 135 C 56 155, 65 175, 78 182" stroke="url(#goldFeather)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 72 125 C 68 148, 76 168, 86 172" stroke="url(#goldFeather)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </g>
+
+        <!-- Right Resting Wing with Bright Golden Feather Ribs -->
+        <g id="restingWingRight" class="resting-wing">
+          <path d="M 175 110 C 200 125, 208 165, 180 185 C 168 170, 164 140, 175 110 Z" fill="#132752" stroke="#2563eb" stroke-width="1.5"/>
+          <path d="M 198 135 C 204 155, 195 175, 182 182" stroke="url(#goldFeather)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 188 125 C 192 148, 184 168, 174 172" stroke="url(#goldFeather)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </g>
+
+        <!-- Main Body Torso -->
+        <ellipse cx="130" cy="138" rx="52" ry="62" fill="url(#bodyBlue)"/>
+
+        <!-- Fluffy Belly with Feather Scallops -->
+        <ellipse cx="130" cy="150" rx="36" ry="42" fill="url(#bellyCream)"/>
+        <path d="M 118 138 Q 124 144 130 138 Q 136 144 142 138" stroke="#d97706" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 112 153 Q 121 160 130 153 Q 139 160 148 153" stroke="#d97706" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 118 168 Q 124 174 130 168 Q 136 174 142 168" stroke="#d97706" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+        <!-- Head Ears / Tufts with Gold Tips -->
+        <path d="M 92 75 L 75 42 L 105 60 Z" fill="#091427"/>
+        <path d="M 168 75 L 185 42 L 155 60 Z" fill="#091427"/>
+        <path d="M 94 70 L 82 48 L 102 61 Z" fill="url(#goldFeather)"/>
+        <path d="M 166 70 L 178 48 L 158 61 Z" fill="url(#goldFeather)"/>
+
+        <!-- Large Expressive Eye Rims (Golden Borders) -->
+        <circle cx="106" cy="98" r="26" fill="#ffffff" stroke="#f59e0b" stroke-width="4.5"/>
+        <circle cx="154" cy="98" r="26" fill="#ffffff" stroke="#f59e0b" stroke-width="4.5"/>
+
+        <!-- Dynamic Left Pupil (Center 106, 98) -->
+        <g id="leftPupilGroup" transform="translate(106, 98)">
+          <circle cx="0" cy="0" r="12" fill="#0a192f"/>
+          <!-- Catchlight Glints -->
+          <circle cx="-3.5" cy="-4" r="4.2" fill="#ffffff"/>
+          <circle cx="4" cy="3.5" r="1.8" fill="#ffffff"/>
+        </g>
+
+        <!-- Dynamic Right Pupil (Center 154, 98) -->
+        <g id="rightPupilGroup" transform="translate(154, 98)">
+          <circle cx="0" cy="0" r="12" fill="#0a192f"/>
+          <circle cx="-3.5" cy="-4" r="4.2" fill="#ffffff"/>
+          <circle cx="4" cy="3.5" r="1.8" fill="#ffffff"/>
+        </g>
+
+        <!-- Golden Beak -->
+        <polygon points="130,105 121,122 139,122" fill="url(#goldFeather)" transform="rotate(180 130 117)"/>
+
+        <!-- Academic Graduation Cap (Mortarboard) with Gold Tassel -->
+        <polygon points="130,22 188,40 130,56 72,40" fill="#061225" stroke="#f59e0b" stroke-width="2"/>
+        <rect x="105" y="48" width="50" height="12" rx="3" fill="#030914"/>
+        <circle cx="130" cy="39" r="3.5" fill="#f59e0b"/>
+        <!-- Golden Tassel draping gracefully -->
+        <path d="M 130 39 Q 165 44 178 65" stroke="#fbbf24" stroke-width="2.5" fill="none"/>
+        <rect x="174" y="65" width="8" height="14" rx="2" fill="#f59e0b"/>
+
+        <!-- Feet with Claws (resting or tucked) -->
+        <g class="owl-feet" id="owlFeet">
+          <ellipse cx="114" cy="198" rx="8" ry="5" fill="#f59e0b"/>
+          <ellipse cx="123" cy="198" rx="7" ry="5" fill="#f59e0b"/>
+          <ellipse cx="137" cy="198" rx="7" ry="5" fill="#f59e0b"/>
+          <ellipse cx="146" cy="198" rx="8" ry="5" fill="#f59e0b"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Flight Controls -->
+  <div class="controls-panel">
+    <button class="btn-ctrl btn-gold" id="btnToggleFlight" onclick="toggleFlightMode()">
+      <i class="fas fa-paper-plane"></i> <span id="flightBtnText">Take Flight (Open Wings)</span>
+    </button>
+    <button class="btn-ctrl" onclick="flyRandom()">
+      <i class="fas fa-wind"></i> Fly Across Sky
+    </button>
+    <button class="btn-ctrl btn-coral" onclick="sayFact()">
+      <i class="fas fa-comment-dots"></i> Speak Fact
+    </button>
+  </div>
+
+  <div class="instruction-bar">
+    <i class="fas fa-hand-pointer"></i> 
+    <span><strong>Interactive Hint:</strong> Click anywhere inside the dark blue sky arena above — the owl will fly right to your click while its eyes follow your cursor!</span>
+  </div>
+
+  <script>
+    const arena = document.getElementById('arena');
+    const owlActor = document.getElementById('owlActor');
+    const speechBubble = document.getElementById('speechBubble');
+    const btnToggleFlight = document.getElementById('btnToggleFlight');
+    const flightBtnText = document.getElementById('flightBtnText');
+    const leftPupilGroup = document.getElementById('leftPupilGroup');
+    const rightPupilGroup = document.getElementById('rightPupilGroup');
+
+    let isFlightMode = false;
+    const maxPupilTravel = 8.5;
+
+    const facts = [
+      "Hoot! 100 Years of Learning! 🎓",
+      "Founded in 1926 by Sri. Padmanabha Pillai! 🏛️",
+      "I love flying around the UPGS campus! 🍃",
+      "Check out our Digital Classrooms & Labs! 💻",
+      "Knowledge gives you wings to fly! ✨"
+    ];
+    let factIdx = 0;
+
+    // Toggle Flight Mode (Spreads wings & lifts into air)
+    function toggleFlightMode() {
+      isFlightMode = !isFlightMode;
+      if (isFlightMode) {
+        document.body.classList.add('flight-mode');
+        btnToggleFlight.classList.add('active');
+        flightBtnText.textContent = "Land & Perch (Fold Wings)";
+        speechBubble.textContent = "Hoot! Look at my wings! 🕊️";
+        // Lift owl into air
+        owlActor.style.top = "70px";
+      } else {
+        document.body.classList.remove('flight-mode');
+        btnToggleFlight.classList.remove('active');
+        flightBtnText.textContent = "Take Flight (Open Wings)";
+        speechBubble.textContent = "Perched safely on 100 Years of UPGS! 📚";
+        // Land owl back onto books
+        owlActor.style.top = "130px";
+        owlActor.style.left = "calc(50% - 130px)";
+      }
+    }
+
+    // Click anywhere in arena to fly to that spot!
+    arena.addEventListener('click', (e) => {
+      const rect = arena.getBoundingClientRect();
+      const clickX = e.clientX - rect.left - 130; // Center owl
+      const clickY = e.clientY - rect.top - 120;
+
+      // Ensure flight mode is active
+      if (!isFlightMode) {
+        toggleFlightMode();
+      }
+
+      // Constrain inside arena
+      const boundedX = Math.max(10, Math.min(rect.width - 270, clickX));
+      const boundedY = Math.max(20, Math.min(rect.height - 230, clickY));
+
+      owlActor.style.left = boundedX + 'px';
+      owlActor.style.top = boundedY + 'px';
+      speechBubble.textContent = "Flying to you! 💨";
+    });
+
+    // Fly to random spot
+    function flyRandom() {
+      if (!isFlightMode) {
+        toggleFlightMode();
+      }
+      const rect = arena.getBoundingClientRect();
+      const randX = Math.floor(Math.random() * (rect.width - 280)) + 20;
+      const randY = Math.floor(Math.random() * (rect.height - 240)) + 30;
+
+      owlActor.style.left = randX + 'px';
+      owlActor.style.top = randY + 'px';
+      speechBubble.textContent = "Soaring high! 🌟";
+    }
+
+    // Dynamic Eye Tracking (SVG Coordinate Math)
+    window.addEventListener('mousemove', (e) => {
+      // Left eye center in viewport
+      const leftRect = leftPupilGroup.getBoundingClientRect();
+      const leftCenterX = leftRect.left + leftRect.width / 2;
+      const leftCenterY = leftRect.top + leftRect.height / 2;
+
+      const dXLeft = e.clientX - leftCenterX;
+      const dYLeft = e.clientY - leftCenterY;
+      const angleLeft = Math.atan2(dYLeft, dXLeft);
+      const distLeft = Math.min(maxPupilTravel, Math.hypot(dXLeft, dYLeft) / 20);
+
+      const moveXLeft = Math.cos(angleLeft) * distLeft;
+      const moveYLeft = Math.sin(angleLeft) * distLeft;
+      leftPupilGroup.setAttribute('transform', `translate(${106 + moveXLeft}, ${98 + moveYLeft})`);
+
+      // Right eye center in viewport
+      const rightRect = rightPupilGroup.getBoundingClientRect();
+      const rightCenterX = rightRect.left + rightRect.width / 2;
+      const rightCenterY = rightRect.top + rightRect.height / 2;
+
+      const dXRight = e.clientX - rightCenterX;
+      const dYRight = e.clientY - rightCenterY;
+      const angleRight = Math.atan2(dYRight, dXRight);
+      const distRight = Math.min(maxPupilTravel, Math.hypot(dXRight, dYRight) / 20);
+
+      const moveXRight = Math.cos(angleRight) * distRight;
+      const moveYRight = Math.sin(angleRight) * distRight;
+      rightPupilGroup.setAttribute('transform', `translate(${154 + moveXRight}, ${98 + moveYRight})`);
+    });
+
+    function sayFact() {
+      factIdx = (factIdx + 1) % facts.length;
+      speechBubble.textContent = facts[factIdx];
+    }
+  </script>
+</body>
+</html>

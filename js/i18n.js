@@ -3,8 +3,8 @@
 const translations = {
   en: {
     // Brand & Header
-    school_name: "UPGS Punukkannoor",
-    school_tagline: "Upper Primary Government School",
+    school_name: "UPGS Punukkonnoor",
+    school_tagline: "Shaping Young Minds",
     centenary_tagline: "Celebrating 100 Years of Excellence (1926 - 2026)",
     top_notice: "🎉 Centenary Year Alumni Data Collection Campaign Active!",
     ticker_label: "UPDATE",

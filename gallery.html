@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
 </head>
 <body>
 
@@ -23,9 +29,6 @@
       </div>
       <div class="top-bar-actions">
         <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
-        <button class="lang-switch-btn" onclick="toggleLanguage()">
-          <i class="fas fa-globe"></i> <span id="lang-toggle-text">മലയാളം</span>
-        </button>
       </div>
     </div>
   </div>
@@ -34,10 +37,9 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="brand-logo">
-        <img src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <img loading="lazy"  src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
         <div class="brand-text">
           <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
-          <p data-i18n="school_tagline">Upper Primary Government School</p>
         </div>
       </a>
 
@@ -84,17 +86,17 @@
       
       <!-- Filter Buttons -->
       <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;">
-        <button class="btn btn-primary gallery-filter-btn active" data-filter="all" onclick="filterGallery('all', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
-          All Photos (24)
+        <button class="gallery-filter-btn active" data-filter="all" onclick="filterGallery('all', this)">
+          <i class="fas fa-th"></i> All Photos (24)
         </button>
-        <button class="btn btn-outline gallery-filter-btn" data-filter="campus" onclick="filterGallery('campus', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
-          Campus & Infrastructure
+        <button class="gallery-filter-btn" data-filter="campus" onclick="filterGallery('campus', this)">
+          <i class="fas fa-university"></i> Campus & Infrastructure
         </button>
-        <button class="btn btn-outline gallery-filter-btn" data-filter="events" onclick="filterGallery('events', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
-          Events & Celebrations
+        <button class="gallery-filter-btn" data-filter="events" onclick="filterGallery('events', this)">
+          <i class="fas fa-glass-cheers"></i> Events & Celebrations
         </button>
-        <button class="btn btn-outline gallery-filter-btn" data-filter="activities" onclick="filterGallery('activities', this)" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
-          Student Activities & Sports
+        <button class="gallery-filter-btn" data-filter="activities" onclick="filterGallery('activities', this)">
+          <i class="fas fa-running"></i> Student Activities & Sports
         </button>
       </div>
 
@@ -421,7 +423,7 @@
   <!-- Lightbox Modal Container -->
   <div id="imageLightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
     <span class="lightbox-close" onclick="closeLightboxDirect()">&times;</span>
-    <img class="lightbox-content" id="lightboxImage" alt="Expanded Photo View">
+    <img loading="lazy"  class="lightbox-content" id="lightboxImage" alt="Expanded Photo View">
   </div>
 
   <!-- Gallery Filter & Lightbox Script -->
@@ -506,7 +508,6 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
