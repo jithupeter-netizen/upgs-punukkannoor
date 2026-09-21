@@ -91,10 +91,33 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Pause on hover (only for devices that support hover, e.g. desktop)
-  const heroContainer = document.querySelector('.minimalist-hero-section');
+  const heroContainer = document.querySelector('.fullwidth-hero-slider, .minimalist-hero-section');
   if (heroContainer && window.matchMedia('(hover: hover)').matches) {
     heroContainer.addEventListener('mouseenter', stopAutoPlay);
     heroContainer.addEventListener('mouseleave', startAutoPlay);
+  }
+
+  // Touch swipe gesture support for mobile devices
+  if (heroContainer) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    heroContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    heroContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diffX = touchStartX - touchEndX;
+      if (Math.abs(diffX) > 45) {
+        if (diffX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        startAutoPlay();
+      }
+    }, { passive: true });
   }
 
   // Initialize
