@@ -1,7 +1,59 @@
-/* UPGS Punukkonnoor - Alumni Data Collection Form Handler with Google Sheets Webhook */
+const fs = require('fs');
+
+console.log('=== SECURITY HARDENING SCRIPT ===');
+
+// 1. Fix all target="_blank" in HTML files
+const htmlFiles = fs.readdirSync('.').filter(f => f.endsWith('.html'));
+let totalLinksFixed = 0;
+
+htmlFiles.forEach(file => {
+  let content = fs.readFileSync(file, 'utf8');
+  let fileChanged = false;
+
+  // Pattern A: target="_blank" rel="noopener" -> target="_blank" rel="noopener noreferrer"
+  const relNoopenerRegex = /target=["']_blank["']\s+rel=["']noopener["']/gi;
+  if (relNoopenerRegex.test(content)) {
+    content = content.replace(relNoopenerRegex, 'target="_blank" rel="noopener noreferrer"');
+    fileChanged = true;
+  }
+
+  // Pattern B: rel="noopener" target="_blank" -> rel="noopener noreferrer" target="_blank"
+  const relBeforeRegex = /rel=["']noopener["']\s+target=["']_blank["']/gi;
+  if (relBeforeRegex.test(content)) {
+    content = content.replace(relBeforeRegex, 'rel="noopener noreferrer" target="_blank"');
+    fileChanged = true;
+  }
+
+  // Pattern C: target="_blank" without any rel attribute
+  const targetNoRelRegex = /<a\b((?:(?!rel=)[^>])*?)target=["']_blank["']((?:(?!rel=)[^>])*?)>/gi;
+  content = content.replace(targetNoRelRegex, (match, p1, p2) => {
+    // Only replace if 'rel=' is genuinely not in the tag
+    if (!match.includes('rel=')) {
+      fileChanged = true;
+      return `<a${p1}target="_blank" rel="noopener noreferrer"${p2}>`;
+    }
+    return match;
+  });
+
+  if (fileChanged) {
+    fs.writeFileSync(file, content, 'utf8');
+    console.log(`[Fixed] Secured external links in ${file}`);
+  }
+});
+
+// 2. Fix centenary-hub.js
+let hubContent = fs.readFileSync('js/centenary-hub.js', 'utf8');
+if (hubContent.includes('target="_blank" rel="noopener"')) {
+  hubContent = hubContent.replace('target="_blank" rel="noopener"', 'target="_blank" rel="noopener noreferrer"');
+  fs.writeFileSync('js/centenary-hub.js', hubContent, 'utf8');
+  console.log('[Fixed] Secured WhatsApp link in js/centenary-hub.js');
+}
+
+// 3. Harden js/alumni-form.js
+const hardenedAlumniForm = `/* UPGS Punukkonnoor - Alumni Data Collection Form Handler with Google Sheets Webhook */
 
 // 👉 Google Apps Script Web App URL:
-const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzZ7sw_OCbXA5_NS6JhmDoh2IZs0Br8EHVHoKnoveu0tVMaN-vmTclej--00Q2Jd7G16A/exec';
+const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzPWgW7k2rj8zDVscQb9IdMK-3etUZ8LIbt3JGBVgsi0CocTAWSzPtjwJ7YmdhbQnw/exec';
 
 /**
  * Sanitizes input string to prevent XSS and strip control characters
@@ -12,46 +64,14 @@ const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzZ7sw
 function sanitizeInput(str, maxLen = 200) {
   if (typeof str !== 'string') return '';
   return str
-    .replace(/[<>\/\\{}]/g, '') // Strip markup delimiters
+    .replace(/[<>\\/\\\\{}]/g, '') // Strip markup delimiters
     .trim()
     .slice(0, maxLen);
 }
 
-// Modal Close Handler - exposed globally on window so inline onclick="closeModal()" always works
-window.closeModal = function () {
-  const modal = document.getElementById('success-modal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
   const alumniForm = document.getElementById('alumni-registration-form');
   const passingYearSelect = document.getElementById('passing_year');
-  const modal = document.getElementById('success-modal');
-  const closeBtn = document.getElementById('alumniModalCloseBtn');
-
-  // Wire up modal close button and backdrop click on page load
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      window.closeModal();
-    });
-  }
-
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        window.closeModal();
-      }
-    });
-  }
-
-  // Dismiss modal on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      window.closeModal();
-    }
-  });
 
   // 1. Populate Batch Years (1926 to 2026)
   if (passingYearSelect) {
@@ -61,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let year = endYear; year >= startYear; year--) {
       const option = document.createElement('option');
       option.value = String(year);
-      option.textContent = `${year} Batch`;
+      option.textContent = \`\${year} Batch\`;
       passingYearSelect.appendChild(option);
     }
   }
@@ -100,22 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Validate phone number format (at least 7 digits)
-      const phoneDigits = phoneNumber.replace(/\D/g, '');
+      const phoneDigits = phoneNumber.replace(/\\D/g, '');
       if (phoneDigits.length < 7 || phoneDigits.length > 15) {
         alert('Please enter a valid WhatsApp / contact phone number (at least 7 digits).');
         return;
       }
 
       // Validate email format if provided
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
         alert('Please enter a valid email address, or leave it blank.');
-        return;
-      }
-
-      // Validate Cloudflare Turnstile CAPTCHA Token
-      const turnstileResponse = alumniForm.querySelector('[name="cf-turnstile-response"]')?.value;
-      if (!turnstileResponse) {
-        alert('Please complete the Cloudflare security verification (I am human) before submitting.');
         return;
       }
 
@@ -132,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const receiptId = 'UPGS100-ALM-' + (1000 + (randBuf[0] % 9000));
 
       const payload = {
-        action: 'alumni',
         receiptId,
         fullName,
         passingYear,
@@ -141,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         location,
         occupation,
         memories,
-        turnstileToken: turnstileResponse,
         submittedAt: new Date().toISOString()
       };
 
@@ -170,11 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showSuccessModal(fullName, receiptId, passingYear);
         alumniForm.reset();
 
-        // Reset Turnstile widget
-        if (typeof window.turnstile !== 'undefined') {
-          window.turnstile.reset();
-        }
-
       } catch (err) {
         console.error('Submission error:', err);
         if (err.name === 'AbortError') {
@@ -200,7 +206,11 @@ function showSuccessModal(name, receiptId, year) {
   if (modal && receiptElem && nameElem) {
     // Safe textContent assignment prevents XSS
     receiptElem.textContent = receiptId;
-    nameElem.textContent = `${name} (${year} Batch)`;
+    nameElem.textContent = \`\${name} (\${year} Batch)\`;
     modal.classList.add('active');
   }
 }
+`;
+
+fs.writeFileSync('js/alumni-form.js', hardenedAlumniForm, 'utf8');
+console.log('[Fixed] Hardened js/alumni-form.js with input sanitization, phone/email validation, timeout abort controller, and cryptographic receipt ID.');

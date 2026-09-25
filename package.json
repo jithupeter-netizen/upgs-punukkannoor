@@ -1,7 +1,7 @@
 {
   "name": "upgs-punukkannoor",
   "version": "1.0.0",
-  "description": "[![School](https://img.shields.io/badge/School-UPGS%20Punukkannoor-blue.svg)](https://github.com) [![Centenary](https://img.shields.io/badge/Jubilee-100%20Years%20(1926--2026)-gold.svg)](https://github.com) [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com)",
+  "description": "[![School](https://img.shields.io/badge/School-UPGS%20Punukkonnoor-blue.svg)](https://github.com) [![Centenary](https://img.shields.io/badge/Jubilee-100%20Years%20(1926--2026)-gold.svg)](https://github.com) [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com)",
   "main": "index.js",
   "scripts": {
     "dev": "vite",

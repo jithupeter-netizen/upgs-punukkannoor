@@ -1,4 +1,4 @@
-/* UPGS Punukkannoor - Main Interactive Script */
+/* UPGS Punukkonnoor - Main Interactive Script */
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Mobile Menu Drawer Toggle

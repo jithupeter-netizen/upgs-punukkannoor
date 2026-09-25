@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - UPGS Punukkannoor 100th Centenary Celebration</title>
-  <meta name="description" content="Contact UPGS Punukkannoor school authorities, PTA executive, or centenary committee. School address, phone numbers, and interactive map.">
+  <title>Contact Us - UPGS Punukkonnoor | 100 Years of Excellence</title>
+  <meta name="description" content="Contact UPGS Punukkonnoor school authorities, PTA executive, or centenary committee. School address, phone numbers, and interactive map.">
   
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
@@ -13,8 +13,8 @@
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://images.unsplash.com">
+  <!-- Cloudflare Turnstile CAPTCHA API -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -22,10 +22,10 @@
   <div class="top-bar">
     <div class="container top-bar-content">
       <div class="top-social-links">
-        <a href="#" class="top-social-icon" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/upgschoolpunukkonnoor" class="top-social-icon" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/919447135592" class="top-social-icon" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="top-social-icon" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="top-social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/upgschoolpunukkonnoor" class="top-social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/919447135592" class="top-social-icon" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="top-social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
       </div>
       <div class="top-bar-actions">
         <a href="tel:9447135592" style="color: inherit; text-decoration: none;"><i class="fas fa-phone-alt" style="color: var(--accent-coral);"></i> +91 9447135592</a>
@@ -37,9 +37,10 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="brand-logo">
-        <img loading="lazy" src="images/UPGS LOGO.svg" alt="UPGS Punukkannoor" class="brand-logo-img">
+        <img loading="lazy" src="images/UPGS LOGO.svg" alt="UPGS Punukkonnoor" class="brand-logo-img">
         <div class="brand-text">
-          <h1 data-i18n="school_name">UPGS Punukkannoor</h1>
+          <h1>UPGS Punukkonnoor</h1>
+          <p>100 Years of Excellence</p>
         </div>
       </a>
 
@@ -48,23 +49,23 @@
       </button>
 
       <ul class="nav-links-menu" id="nav-menu">
-        <li><a href="index.html" class="nav-item-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="index.html" class="nav-item-link">Home</a></li>
         
         <li class="nav-item-dropdown">
           <a href="about.html" class="nav-item-link">
-            <span data-i18n="nav_about">About Us</span> <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 2px;"></i>
+            <span>About Us</span> <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 2px;"></i>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="about.html" class="dropdown-item" data-i18n="nav_about_school"><i class="fas fa-university" style="color: var(--accent-blue);"></i> About School</a></li>
-            <li><a href="staff.html" class="dropdown-item" data-i18n="nav_staff"><i class="fas fa-chalkboard-teacher" style="color: var(--accent-coral);"></i> Staff Directory</a></li>
-            <li><a href="about.html#curriculum" class="dropdown-item" data-i18n="nav_curriculum"><i class="fas fa-book-open" style="color: #d97706;"></i> Curriculum</a></li>
+            <li><a href="about.html" class="dropdown-item"><i class="fas fa-university" style="color: var(--accent-blue);"></i> About School</a></li>
+            <li><a href="staff.html" class="dropdown-item"><i class="fas fa-chalkboard-teacher" style="color: var(--accent-coral);"></i> Staff Directory</a></li>
+            <li><a href="curriculum.html" class="dropdown-item"><i class="fas fa-book-open" style="color: #d97706;"></i> Curriculum</a></li>
           </ul>
         </li>
 
-        <li><a href="virtual-tour.html" class="nav-item-link" data-i18n="nav_tour">360° Tour</a></li>
-        <li><a href="gallery.html" class="nav-item-link" data-i18n="nav_gallery">Gallery</a></li>
-        <li><a href="contact.html" class="nav-item-link active" data-i18n="nav_contact">Contact</a></li>
-        <li><a href="alumni.html" class="nav-cta-btn" data-i18n="nav_register_btn">Join Alumni</a></li>
+        <li><a href="virtual-tour.html" class="nav-item-link">360° Tour</a></li>
+        <li><a href="gallery.html" class="nav-item-link">Gallery</a></li>
+        <li><a href="contact.html" class="nav-item-link active">Contact</a></li>
+        <li><a href="alumni.html" class="nav-cta-btn">Join Alumni</a></li>
       </ul>
     </div>
   </nav>
@@ -96,9 +97,10 @@
             <div class="contact-item-details">
               <h4>School Address</h4>
               <p>
-                <strong>UPGSchool Punukkannoor</strong><br>
-                Unnimukk Alummoodu Rd, Kottamkara<br>
-                Alummoodu P.O., Kundara, Kollam - 691577, Kerala
+                <strong>UPGS Punukkonnoor</strong><br>
+                Punukkonnoor,<br>
+                Alummoodu P.O.,<br>
+                Kollam 691577
               </p>
             </div>
           </div>
@@ -111,7 +113,7 @@
               <h4>Phone & WhatsApp</h4>
               <p>
                 <a href="tel:9447135592" style="font-weight: 700; color: var(--primary-navy);">+91 9447135592</a><br>
-                <a href="https://wa.me/919447135592" target="_blank" rel="noopener" style="color: #059669; font-weight: 700;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="https://wa.me/919447135592" target="_blank" rel="noopener noreferrer" style="color: #059669; font-weight: 700;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
               </p>
             </div>
           </div>
@@ -123,7 +125,7 @@
             <div class="contact-item-details">
               <h4>Official Email</h4>
               <p>
-                <a href="mailto:41660kundaraupgs@gmail.com" style="font-weight: 600;">41660kundaraupgs@gmail.com</a>
+                <a href="mailto:upgspunukkonnoor@gmail.com" style="font-weight: 600;">upgspunukkonnoor@gmail.com</a>
               </p>
             </div>
           </div>
@@ -135,7 +137,7 @@
             <div class="contact-item-details">
               <h4>Instagram Channel</h4>
               <p>
-                <a href="https://www.instagram.com/upgschoolpunukkonnoor" target="_blank" rel="noopener" style="color: #db2777; font-weight: 700;">@upgschoolpunukkonnoor</a>
+                <a href="https://www.instagram.com/upgschoolpunukkonnoor" target="_blank" rel="noopener noreferrer" style="color: #db2777; font-weight: 700;">@upgschoolpunukkonnoor</a>
               </p>
             </div>
           </div>
@@ -157,8 +159,8 @@
         <!-- Google Map Embed -->
         <div class="contact-map-wrapper">
           <div class="contact-map-header">
-            <span><i class="fas fa-location-arrow" style="color: var(--accent-coral); margin-right: 0.5rem;"></i> UPGS Punukkannoor Map</span>
-            <a href="https://maps.app.goo.gl/gxLNB7rLtEkL8Bmp8" target="_blank" rel="noopener" style="color: var(--accent-blue); text-decoration: none; font-size: 0.82rem; font-weight: 700;">Open in Google Maps <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i></a>
+            <span><i class="fas fa-location-arrow" style="color: var(--accent-coral); margin-right: 0.5rem;"></i> UPGS Punukkonnoor Map</span>
+            <a href="https://maps.app.goo.gl/gxLNB7rLtEkL8Bmp8" target="_blank" rel="noopener noreferrer" style="color: var(--accent-blue); text-decoration: none; font-size: 0.82rem; font-weight: 700;">Open in Google Maps <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i></a>
           </div>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.5612480507!2d76.6665525!3d8.9203165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05e2ebeea36b9f%3A0xd49553dd4eabb5e9!2sAlummoodu%20LP%26UP%20School!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" width="100%" height="270" style="border:0; display: block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -173,29 +175,29 @@
             <p class="form-card-desc">Have questions regarding admissions, centenary events, or school programs? Fill out the form and our administration will get back to you promptly.</p>
           </div>
           
-          <form onsubmit="event.preventDefault(); alert('Thank you for contacting UPGS Punukkannoor. We will reply shortly.'); this.reset();">
+          <form id="contactInquiryForm">
             
             <!-- Row 1: Full Name & Email -->
             <div class="form-grid-row">
               <div>
-                <label class="form-custom-label">
+                <label class="form-custom-label" for="contact_name">
                   <span>Full Name</span>
                   <span class="req">*</span>
                 </label>
                 <div class="input-icon-wrapper">
                   <i class="fas fa-user input-icon"></i>
-                  <input type="text" class="form-custom-input" placeholder="e.g. Anjali Nair" required>
+                  <input type="text" id="contact_name" name="fullName" class="form-custom-input" placeholder="e.g. Anjali Nair" required>
                 </div>
               </div>
 
               <div>
-                <label class="form-custom-label">
+                <label class="form-custom-label" for="contact_email">
                   <span>Email Address</span>
                   <span class="req">*</span>
                 </label>
                 <div class="input-icon-wrapper">
                   <i class="fas fa-envelope input-icon"></i>
-                  <input type="email" class="form-custom-input" placeholder="e.g. anjali@example.com" required>
+                  <input type="email" id="contact_email" name="email" class="form-custom-input" placeholder="e.g. anjali@example.com" required>
                 </div>
               </div>
             </div>
@@ -203,30 +205,30 @@
             <!-- Row 2: Phone & Category -->
             <div class="form-grid-row">
               <div>
-                <label class="form-custom-label">
+                <label class="form-custom-label" for="contact_phone">
                   <span>Phone / WhatsApp</span>
                   <span class="req">*</span>
                 </label>
                 <div class="input-icon-wrapper">
                   <i class="fas fa-phone-alt input-icon"></i>
-                  <input type="tel" class="form-custom-input" placeholder="e.g. +91 9876543210" required>
+                  <input type="tel" id="contact_phone" name="phone" class="form-custom-input" placeholder="e.g. +91 9876543210" required>
                 </div>
               </div>
 
               <div>
-                <label class="form-custom-label">
+                <label class="form-custom-label" for="contact_category">
                   <span>Inquiry Type</span>
                   <span class="req">*</span>
                 </label>
                 <div class="input-icon-wrapper">
                   <i class="fas fa-tag input-icon"></i>
-                  <select class="form-custom-select" required>
+                  <select id="contact_category" name="category" class="form-custom-select" required>
                     <option value="" disabled selected>Select Category</option>
-                    <option value="admissions">New Student Admissions (Class 1-7)</option>
-                    <option value="centenary">100th Centenary Celebration 2026</option>
-                    <option value="alumni">Alumni & PTA Matters</option>
-                    <option value="academics">Academic & Smart Classroom</option>
-                    <option value="general">General Inquiries & Feedback</option>
+                    <option value="Admissions">New Student Admissions (Class 1-7)</option>
+                    <option value="Centenary">100th Centenary Celebration 2026</option>
+                    <option value="Alumni">Alumni & PTA Matters</option>
+                    <option value="Academics">Academic & Smart Classroom</option>
+                    <option value="General">General Inquiries & Feedback</option>
                   </select>
                 </div>
               </div>
@@ -234,38 +236,43 @@
 
             <!-- Subject Field -->
             <div class="form-field-group">
-              <label class="form-custom-label">
+              <label class="form-custom-label" for="contact_subject">
                 <span>Subject</span>
                 <span class="req">*</span>
               </label>
               <div class="input-icon-wrapper">
                 <i class="fas fa-heading input-icon"></i>
-                <input type="text" class="form-custom-input" placeholder="e.g. Inquiry regarding Class 5 Admission & Documents" required>
+                <input type="text" id="contact_subject" name="subject" class="form-custom-input" placeholder="e.g. Inquiry regarding Class 5 Admission & Documents" required>
               </div>
             </div>
 
             <!-- Message Field -->
             <div class="form-field-group">
-              <label class="form-custom-label">
+              <label class="form-custom-label" for="contact_message">
                 <span>Your Message</span>
                 <span class="req">*</span>
               </label>
               <div class="input-icon-wrapper">
                 <i class="fas fa-comment-dots input-icon" style="top: 1.25rem;"></i>
-                <textarea class="form-custom-textarea" placeholder="Please write your detailed message or questions here..." required></textarea>
+                <textarea id="contact_message" name="message" class="form-custom-textarea" placeholder="Please write your detailed message or questions here..." required></textarea>
               </div>
+            </div>
+
+            <!-- Cloudflare Turnstile CAPTCHA (Spam Protection) -->
+            <div style="margin: 1.25rem 0;">
+              <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"></div>
             </div>
 
             <!-- Submit Button & Note -->
             <div class="form-action-row">
               <button type="submit" class="form-stylish-btn">
-                <span>Send Message</span>
+                <span>Send Message to School</span>
                 <i class="fas fa-paper-plane"></i>
               </button>
               
               <div class="form-security-note">
                 <i class="fas fa-shield-check"></i>
-                <span>Direct to UPGS School Administration • Prompt Response</span>
+                <span>Direct to UPGS School Administration (upgspunukkonnoor@gmail.com)</span>
               </div>
             </div>
 
@@ -281,43 +288,46 @@
     <div class="container">
       <div class="footer-grid-4">
         <div>
-          <h2 class="footer-brand-title" data-i18n="school_name">UPGS Punukkannoor</h2>
-          <p data-i18n="footer_desc" style="font-size: 0.95rem; line-height: 1.6;">Upper Primary Government School Punukkannoor, Kollam. Dedicated to educational excellence since 1926.</p>
+          <h2 class="footer-brand-title">UPGS Punukkonnoor</h2>
+          <p style="font-size: 0.95rem; line-height: 1.6;">100 years of excellence – A legacy that inspires Generations.</p>
         </div>
 
         <div>
-          <h4 class="footer-heading" data-i18n="footer_quick_links">Quick Links</h4>
+          <h4 class="footer-heading">Quick Links</h4>
           <ul class="footer-nav-list">
-            <li><a href="about.html" data-i18n="nav_about">About Us</a></li>
-            <li><a href="staff.html" data-i18n="nav_staff">Staff Directory</a></li>
-            <li><a href="alumni.html" data-i18n="nav_alumni">Alumni Portal</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="curriculum.html">Curriculum</a></li>
+            <li><a href="staff.html">Staff Directory</a></li>
+            <li><a href="alumni.html">Alumni Portal</a></li>
           </ul>
         </div>
 
         <div>
           <h4 class="footer-heading">Explore</h4>
           <ul class="footer-nav-list">
-            <li><a href="virtual-tour.html" data-i18n="nav_tour">360° Tour</a></li>
-            <li><a href="gallery.html" data-i18n="nav_gallery">Photo Gallery</a></li>
-            <li><a href="contact.html" data-i18n="nav_contact">Contact Us</a></li>
+            <li><a href="virtual-tour.html">360° Tour</a></li>
+            <li><a href="gallery.html">Photo Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="footer-heading" data-i18n="footer_contact_info">Contact Info</h4>
-          <p style="margin-bottom: 0.5rem; font-size: 0.95rem;" data-i18n="footer_address">UPGSchool Punukkonnoor, Alummoodu P.O., Kundara - 691577</p>
+          <h4 class="footer-heading">Contact Info</h4>
+          <p style="margin-bottom: 0.5rem; font-size: 0.95rem;">UPGSchool Punukkonnoor, Alummoodu P.O., Kundara - 691577</p>
           <p style="margin-bottom: 0.5rem; font-size: 0.95rem;"><i class="fas fa-phone"></i> <a href="tel:9447135592" style="color: inherit; text-decoration: none;">+91 9447135592</a></p>
-          <p style="font-size: 0.95rem;"><i class="fas fa-envelope"></i> <a href="mailto:41660kundaraupgs@gmail.com" style="color: inherit; text-decoration: none;">41660kundaraupgs@gmail.com</a></p>
+          <p style="font-size: 0.95rem;"><i class="fas fa-envelope"></i> <a href="mailto:upgspunukkonnoor@gmail.com" style="color: inherit; text-decoration: none;">upgspunukkonnoor@gmail.com</a></p>
         </div>
       </div>
 
       <div class="footer-sub-bar">
-        <p data-i18n="footer_rights">© 2026 UPGS Punukkannoor 100th Centenary Committee. All Rights Reserved.</p>
-        <p>Built with ❤️ for UPGS Punukkannoor</p>
+        <p>© 2026 UPGS Punukkonnoor 100th Centenary Committee. All Rights Reserved.</p>
+        <p>Built with ❤️ for UPGS Punukkonnoor</p>
       </div>
     </div>
   </footer>
 
   <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/centenary-hub.js"></script>
+  <script type="module" src="js/contact-form.js"></script>
 </body>
 </html>

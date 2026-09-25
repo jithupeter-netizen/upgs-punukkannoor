@@ -1,5 +1,5 @@
 /* ==========================================================================
-   UPGS Punukkannoor — True 3D Inside-Out Globe Panorama Engine
+   UPGS Punukkonnoor — True 3D Inside-Out Globe Panorama Engine
    Renders 2:1 Equirectangular Panoramas from inside a 3D Sphere (Globe)
    Supports: Three.js 3D WebGL Globe, Pitch/Yaw/FOV, Touch & Drag, Auto-Rotate & Pannellum
    ========================================================================== */
@@ -243,7 +243,7 @@ const UPGS360Viewer = (function () {
         activeTourInstance = window.pannellum.viewer(containerId, {
           default: {
             firstScene: 'classroom',
-            author: 'UPGS Punukkannoor',
+            author: 'UPGS Punukkonnoor',
             sceneFadeDuration: 1000,
             autoLoad: true,
             compass: false,

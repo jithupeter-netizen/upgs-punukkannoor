@@ -1,10 +1,10 @@
-# 🏫 UPGS Punukkannoor — 100th Centenary Jubilee Website
+# 🏫 UPGS Punukkonnoor — 100th Centenary Jubilee Website
 
-[![School](https://img.shields.io/badge/School-UPGS%20Punukkannoor-blue.svg)](https://github.com)
+[![School](https://img.shields.io/badge/School-UPGS%20Punukkonnoor-blue.svg)](https://github.com)
 [![Centenary](https://img.shields.io/badge/Jubilee-100%20Years%20(1926--2026)-gold.svg)](https://github.com)
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com)
 
-Welcome to the official web application for **Upper Primary Government School (UPGS) Punukkannoor**, located in Kollam District, Kerala, India. 
+Welcome to the official web application for **Upper Primary Government School (UPGS) Punukkonnoor**, located in Kollam District, Kerala, India. 
 
 Designed with a **Minimalist Editorial** aesthetic, this responsive website celebrates **100 Years of Educational Excellence (1926 – 2026)**. It serves as a digital gateway for students, parents, faculty, global alumni, and community members.
 
@@ -36,7 +36,7 @@ Designed with a **Minimalist Editorial** aesthetic, this responsive website cele
 ## 📁 Directory Structure
 
 ```text
-UPGS Punukkannoor/
+UPGS Punukkonnoor/
 ├── index.html            # Main Landing Page with 360 Hero & Centenary Highlights
 ├── about.html            # School History (1926-2026), Vision, & Headmasters Timeline
 ├── staff.html            # Faculty & Staff Directory
@@ -101,12 +101,12 @@ Since this project is built using native web technologies (HTML, CSS, JavaScript
 
 ## 📞 Contact & School Info
 
-- **School**: Upper Primary Government School (UPGS) Punukkannoor
-- **Location**: Punukkannoor, Perumpuzha P.O., Kollam, Kerala - 691504
+- **School**: Upper Primary Government School (UPGS) Punukkonnoor
+- **Location**: Punukkonnoor, Perumpuzha P.O., Kollam, Kerala - 691504
 - **Phone**: +91 474 2501234
-- **Email**: upgspunukkannoor@gmail.com
+- **Email**: upgspunukkonnoor@gmail.com
 - **Centenary Jubilee Year**: 1926 – 2026
 
 ---
 
-© 2026 UPGS Punukkannoor. All Rights Reserved. Celebrating 100 Years of Educational Service.
+© 2026 UPGS Punukkonnoor. All Rights Reserved. Celebrating 100 Years of Educational Service.
