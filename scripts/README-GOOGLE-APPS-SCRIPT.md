@@ -46,16 +46,14 @@ Open both script files and update `GOOGLE_WEBHOOK_URL`:
 
 ## 🛡️ Step 3: Cloudflare Turnstile CAPTCHA Setup (Free)
 
-The website currently uses Cloudflare's official testing Sitekey (`1x00000000000000000000AA`), which automatically passes in local development so you can test smoothly.
+The website uses Cloudflare Turnstile for spam protection on both `contact.html` and `alumni.html`.
 
-When you host on **Cloudflare Pages**:
-1. Log into your free [Cloudflare Dashboard](https://dash.cloudflare.com).
-2. On the left navigation, click **Turnstile** ➔ **Add Widget**.
-3. **Widget Name**: `UPGS Punukkonnoor Forms`
-4. **Domains**: Add your Cloudflare Pages domain (e.g. `upgs-punukkannoor.pages.dev` and your custom domain).
-5. **Widget Mode**: `Managed` (Recommended — 1-click invisible or subtle check).
-6. Click **Create** to receive your **Site Key**.
-7. In [`contact.html`](../contact.html) and [`alumni.html`](../alumni.html), replace `data-sitekey="1x00000000000000000000AA"` with your real Site Key.
+- **Turnstile Site Key**: `0x4AAAAAAFC_ukIYVeqZOtUb`
+- **Allowed Hostnames in Cloudflare**:
+  - `upgs-punukkannoor.pages.dev`
+  - `upgspunukkonnoor.com`
+  - `localhost` (allows testing on local development server)
+- **Widget Mode**: `Managed`
 
 ---
 
