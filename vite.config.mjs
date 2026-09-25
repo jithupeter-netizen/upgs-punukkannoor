@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import fs from 'fs';
 
 export default defineConfig({
   build: {
@@ -17,4 +18,14 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    {
+      name: 'copy-360-assets',
+      closeBundle() {
+        if (fs.existsSync('360')) {
+          fs.cpSync('360', 'dist/360', { recursive: true });
+        }
+      }
+    }
+  ]
 });
