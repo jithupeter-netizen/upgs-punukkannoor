@@ -1095,7 +1095,7 @@
   }
   .slider-centenary-ribbon {
     top: 0;
-    left: 10px;
+    left: clamp(18px, 5vw, 32px);
     width: 90px;
   }
   .ribbon-top-brooch {
@@ -1146,6 +1146,17 @@
   }
   .ribbon-click-hint {
     display: none;
+  }
+  .ribbon-toast-msg {
+    left: 0;
+    transform: translateX(0) translateY(8px) scale(0.9);
+    font-size: 0.76rem;
+    padding: 5px 12px;
+    border-radius: 16px;
+    white-space: nowrap;
+  }
+  .ribbon-toast-msg.show {
+    transform: translateX(0) translateY(0) scale(1);
   }
   .fullwidth-slider-controls {
     bottom: 12px;
