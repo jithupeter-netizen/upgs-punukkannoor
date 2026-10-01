@@ -94,14 +94,14 @@
   </div>
 
   <!-- Dark Single-Line Scrolling Important Message Marquee -->
-  <div class="announcement-marquee-bar">
+  <div class="announcement-marquee-bar" id="liveAnnouncementBar">
     <div class="marquee-badge">
       <i class="fas fa-bullhorn"></i>
-      <span>UPDATE</span>
+      <span id="liveAnnouncementBadge">UPDATE</span>
     </div>
     <div class="marquee-track-container" title="Pause on hover">
       <div class="marquee-content">
-        <span>🎉 UPGS Punukkonnoor 100th Centenary Jubilee Celebrations (1926 - 2026) |
+        <span id="liveAnnouncementText">🎉 UPGS Punukkonnoor 100th Centenary Jubilee Celebrations (1926 - 2026) |
           Centenary Alumni Data Collection Campaign is Active — Join & Register Now! | Digital Smart Classrooms
           Inauguration & Centenary Souvenir Contribution Drive Active!</span>
       </div>
@@ -587,17 +587,17 @@
         <!-- Headmistress Card -->
         <div class="executive-leader-card">
           <div class="leader-photo-box">
-            <img loading="lazy" src="images/Vijayalekshmi.R.jpg" alt="Vijayalekshmi.R - Headmistress" class="leader-photo-img">
+            <img loading="lazy" src="images/Vijayalekshmi.R.jpg" alt="Vijayalekshmi.R - Headmistress" class="leader-photo-img" id="hm-photo-img">
             <div class="leader-photo-badge">Headmistress's Message</div>
           </div>
           <div class="leader-details-box">
             <div class="leader-name-header">
-              <h3>Vijayalekshmi.R</h3>
-              <p><span style="color: #b45309; font-weight: 700;">★ Headmistress</span>, UPGS Punukkonnoor</p>
+              <h3 id="hm-name-text">Vijayalekshmi.R</h3>
+              <p id="hm-title-text"><span style="color: #b45309; font-weight: 700;">★ Headmistress</span>, UPGS Punukkonnoor</p>
             </div>
             <div class="leader-quote-body">
               <i class="fas fa-quote-left quote-icon"></i>
-              <p>Welcome to UPGS Punukkonnoor. For 100 glory-filled years, our
+              <p id="hm-message-text">Welcome to UPGS Punukkonnoor. For 100 glory-filled years, our
                 institution has stood as a beacon of learning, value-based education, and student excellence. Our
                 mission is to empower every child with modern digital learning while preserving our rich heritage. As we
                 celebrate our Centenary Jubilee, I invite all parents, alumni, and well-wishers to join hands in taking
@@ -609,23 +609,71 @@
         <!-- Director / Manager Card -->
         <div class="executive-leader-card">
           <div class="leader-photo-box">
-            <img loading="lazy" src="images/I Geethakumari.jpg" alt="I Geethakumari - School Management Director" class="leader-photo-img">
+            <img loading="lazy" src="images/I Geethakumari.jpg" alt="I Geethakumari - School Management Director" class="leader-photo-img" id="dir-photo-img">
             <div class="leader-photo-badge manager-badge">Director's Message</div>
           </div>
           <div class="leader-details-box">
             <div class="leader-name-header">
-              <h3>I Geethakumari</h3>
-              <p>School Management Director</p>
+              <h3 id="dir-name-text">I Geethakumari</h3>
+              <p id="dir-title-text">School Management Director</p>
             </div>
             <div class="leader-quote-body">
               <i class="fas fa-quote-left quote-icon"></i>
-              <p>Education is the foundation of community progress. At UPGS Punukkonnoor,
+              <p id="dir-message-text">Education is the foundation of community progress. At UPGS Punukkonnoor,
                 we are committed to building state-of-the-art infrastructure, digital smart classrooms, and a nurturing
                 environment where young minds blossom. On this historic 100th Centenary Milestone, we extend our
                 heartfelt gratitude to our dedicated teachers, parents, and alumni community.</p>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic YouTube Video Showcase Section -->
+  <section class="videos-section" id="videos-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">
+          <i class="fab fa-youtube" style="color: #ef4444;"></i> VIDEO SHOWCASE
+        </span>
+        <h2>Campus Life & Centenary Celebrations</h2>
+        <p>Watch video highlights of our school celebrations, student talent, cultural festivals, and centenary milestone moments.</p>
+      </div>
+
+      <div class="videos-grid" id="videos-grid">
+        <!-- Rendered dynamically by js/cms-loader.js with instant cache -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Alumni & Parent Testimonials Section -->
+  <section class="testimonials-section" id="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">
+          <i class="fas fa-quote-right" style="color: var(--accent-gold);"></i> VOICES & MEMORIES
+        </span>
+        <h2>Words from Our Community</h2>
+        <p>Heartfelt experiences and inspiring memories shared by our alumni, parents, and well-wishers across generations.</p>
+      </div>
+
+      <div class="testimonials-carousel-container">
+        <div class="testimonials-carousel-wrapper">
+          <button class="testimonial-arrow-btn" id="testimonialPrevBtn" aria-label="Previous Testimonials">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+
+          <div class="testimonials-track" id="testimonials-grid">
+            <!-- Rendered dynamically by js/cms-loader.js with instant cache -->
+          </div>
+
+          <button class="testimonial-arrow-btn" id="testimonialNextBtn" aria-label="Next Testimonials">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="testimonial-dots" id="testimonialDots"></div>
       </div>
     </div>
   </section>
@@ -701,6 +749,7 @@
   <script type="module" src="js/main.js"></script>
   <script type="module" src="js/hero-slider.js"></script>
   <script type="module" src="js/centenary-hub.js"></script>
+  <script type="module" src="js/cms-loader.js"></script>
 
 </body>
 
