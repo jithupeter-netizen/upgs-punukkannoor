@@ -56,13 +56,22 @@ for (const [filename, meta] of Object.entries(pagesMeta)) {
   content = content.replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`);
   content = content.replace(/<meta name=["']description["'][\s\S]*?>/i, `<meta name="description" content="${meta.description}">`);
 
-  // Remove existing canonical & social tags to prevent duplication
+  // Remove existing canonical, favicon & social tags to prevent duplication
   content = content.replace(/<link rel=["']canonical["'][\s\S]*?>/ig, '');
+  content = content.replace(/<link rel=["'](?:shortcut )?icon["'][\s\S]*?>/ig, '');
+  content = content.replace(/<link rel=["']apple-touch-icon["'][\s\S]*?>/ig, '');
   content = content.replace(/<meta property=["']og:[^"']*["'][\s\S]*?>/ig, '');
   content = content.replace(/<meta name=["']twitter:[^"']*["'][\s\S]*?>/ig, '');
 
   const socialBlock = `
   <link rel="canonical" href="${meta.canonical}">
+
+  <!-- Favicons for browser tab, bookmarks, and Google Search -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
