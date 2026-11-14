@@ -2,8 +2,9 @@
    UPGS Punukkonnoor — Headless CMS Client Loader
    Connects to Google Sheets & Google Drive Backend
    Features:
-   - Dynamic Google Drive Photo Gallery (Streamed directly from Google Drive CDN)
-   - Real-time Category Filtering from Drive Subfolders
+   - Dynamic Google Drive Hero Slider (Streamed directly from Drive "Slide" folder)
+   - Dynamic Google Drive Photo Gallery (Streamed directly from Drive "Gallery" subfolders)
+   - Real-time Category Filtering from Drive Subfolders (Slide photos strictly excluded)
    - Announcements Ticker
    - Dynamic Leadership Messages
    - Testimonials Showcase
@@ -12,8 +13,16 @@
    ========================================================================== */
 
 const GOOGLE_CMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzZ7sw_OCbXA5_NS6JhmDoh2IZs0Br8EHVHoKnoveu0tVMaN-vmTclej--00Q2Jd7G16A/exec';
-const CACHE_KEY = 'upgs_cms_cache_v1';
+const CACHE_KEY = 'upgs_cms_cache_v2';
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+/**
+ * Checks if a photo belongs to the Slide / Hero banner category
+ */
+function isSlideCategory(category) {
+  if (!category) return false;
+  return /^(slide|slides|hero|banner|banners)$/i.test(String(category).trim());
+}
 
 /**
  * Initializes CMS Content on DOM Ready
@@ -23,26 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function initCMS() {
-  const isGalleryPage = window.location.pathname.includes('gallery');
+  const isGalleryPage = !!document.getElementById('galleryGrid') || window.location.pathname.includes('gallery');
+  const isHomePage = !!document.querySelector('.fullwidth-slides-container') || window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
 
-  // 1. Render immediately from cache if available
+  // 1. Render INSTANTLY from localStorage cache (0ms delay)
   const cachedData = getLocalCache();
   if (cachedData) {
     applyCMSData(cachedData);
   }
 
-  // 2. Fetch live data from Google Apps Script
+  // 2. Fetch live data in background (Stale-While-Revalidate pattern)
   try {
-    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const hasEmptyGallery = !cachedData || !cachedData.gallery || cachedData.gallery.length === 0;
-    const isStale = isLocalhost || (isGalleryPage && hasEmptyGallery) || !cachedData || (Date.now() - cachedData._cachedAt > CACHE_TTL_MS);
+    const hasEmptyGallery = isGalleryPage && (!cachedData || !cachedData.gallery || cachedData.gallery.length === 0);
+    const hasEmptySlides = isHomePage && (!cachedData || !cachedData.slides || cachedData.slides.length === 0);
+    const isStale = !cachedData || hasEmptyGallery || hasEmptySlides || (Date.now() - cachedData._cachedAt > CACHE_TTL_MS);
 
     if (isStale) {
-      const freshData = await fetchFromGoogle(isLocalhost || hasEmptyGallery);
+      const freshData = await fetchFromGoogle(false);
       if (freshData && freshData.status === 'success' && freshData.data) {
         setLocalCache(freshData.data);
         applyCMSData(freshData.data);
-      } else if (isGalleryPage) {
+      } else if (isGalleryPage && hasEmptyGallery) {
         handleEmptyGallery();
       }
     }
@@ -112,11 +122,32 @@ function applyCMSData(data) {
     renderTestimonials(data.testimonials);
   }
 
-  if (window.location.pathname.includes('gallery')) {
-    if (data.gallery && data.gallery.length > 0) {
-      renderDriveGallery(data.gallery);
+  // 1. Google Drive Photo Gallery (Exclusive to gallery page)
+  const galleryGrid = document.getElementById('galleryGrid');
+  if (galleryGrid || window.location.pathname.includes('gallery')) {
+    const allGallery = data.gallery || [];
+    // Strict separation: Filter OUT any photo belonging to the Slide category
+    const galleryPhotos = allGallery.filter(p => !isSlideCategory(p.category));
+
+    if (galleryPhotos.length > 0) {
+      renderDriveGallery(galleryPhotos);
     } else {
       handleEmptyGallery();
+    }
+  }
+
+  // 2. Google Drive Homepage Hero Slider (Exclusive to index / pages with hero slider)
+  const slideContainer = document.querySelector('.fullwidth-slides-container');
+  if (slideContainer) {
+    // Slides come either from explicit data.slides OR filtered from data.gallery
+    const slidePhotos = (data.slides && data.slides.length > 0)
+      ? data.slides
+      : (data.gallery || []).filter(p => isSlideCategory(p.category));
+
+    if (slidePhotos && slidePhotos.length > 0) {
+      // Natural sort by title/filename if numbered (e.g., 01_banner.webp, 02_banner.webp)
+      slidePhotos.sort((a, b) => (a.title || '').localeCompare(b.title || '', undefined, { numeric: true, sensitivity: 'base' }));
+      renderHeroSlider(slidePhotos);
     }
   }
 }
@@ -231,7 +262,67 @@ function renderTestimonials(testimonials) {
 }
 
 /* ==========================================================================
-   5. Google Drive Photo Gallery Renderer
+   5. Google Drive Homepage Hero Slider Renderer
+   ========================================================================== */
+function renderHeroSlider(slidePhotos) {
+  const slidesContainer = document.querySelector('.fullwidth-slides-container');
+  const dotsContainer = document.querySelector('.hero-dots');
+
+  if (!slidesContainer || !slidePhotos || slidePhotos.length === 0) return;
+
+  // Prevent re-rendering if the exact same slides are already loaded (zero flicker)
+  const currentIds = Array.from(slidesContainer.querySelectorAll('.hero-slide')).map(s => s.dataset.id).filter(Boolean);
+  const newIds = slidePhotos.map(p => String(p.id || p.src || ''));
+  if (currentIds.length > 0 && currentIds.length === newIds.length && currentIds.every((id, i) => id === newIds[i])) {
+    return;
+  }
+
+  // 1. Generate Slide Items
+  const slidesHtml = slidePhotos.map((photo, index) => {
+    const fullUrl = photo.fullUrl || (photo.id ? `https://lh3.googleusercontent.com/d/${photo.id}=s1600` : photo.src);
+    const fallbackUrl = photo.id ? `https://drive.google.com/thumbnail?id=${photo.id}&sz=w1600` : photo.src;
+    const title = photo.title || `UPGS Punukkonnoor Campus Banner ${index + 1}`;
+    const priorityAttr = index === 0 ? 'fetchpriority="high"' : 'loading="lazy"';
+    const activeClass = index === 0 ? 'active' : '';
+
+    return `
+      <div class="hero-slide fullwidth-slide ${activeClass}" id="slide-${index + 1}" data-id="${photo.id || index}">
+        <img ${priorityAttr} 
+             src="${fullUrl}" 
+             alt="${escapeHtml(title)}" 
+             class="fullwidth-slide-img"
+             referrerpolicy="no-referrer"
+             onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src='${fallbackUrl}';}">
+      </div>
+    `;
+  }).join('');
+
+  // 2. Generate Corresponding Progress Dots
+  let dotsHtml = '';
+  if (dotsContainer) {
+    dotsHtml = slidePhotos.map((_, index) => {
+      const activeClass = index === 0 ? 'active' : '';
+      return `
+        <div class="hero-dot ${activeClass}" data-slide="${index}" aria-label="Slide ${index + 1}">
+          <div class="dot-progress"></div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  slidesContainer.innerHTML = slidesHtml;
+  if (dotsContainer) {
+    dotsContainer.innerHTML = dotsHtml;
+  }
+
+  // 3. Re-initialize and start slider engine
+  if (typeof window.initHeroSlider === 'function') {
+    window.initHeroSlider();
+  }
+}
+
+/* ==========================================================================
+   6. Google Drive Photo Gallery Renderer
    Direct CDN Streaming: https://lh3.googleusercontent.com/d/FILE_ID
    ========================================================================== */
 function renderDriveGallery(photos) {
@@ -241,20 +332,27 @@ function renderDriveGallery(photos) {
     return;
   }
 
+  // Strictly filter out any photo with slide category
+  const filteredPhotos = photos.filter(p => !isSlideCategory(p.category));
+  if (filteredPhotos.length === 0) {
+    handleEmptyGallery();
+    return;
+  }
+
   // 1. Generate category filter buttons from Google Drive subfolders
-  const categories = [...new Set(photos.map(p => p.category || 'General'))];
+  const categories = [...new Set(filteredPhotos.map(p => p.category || 'General'))];
   const filterContainer = document.getElementById('galleryFilterButtons');
   
   if (filterContainer && categories.length > 1) {
     let tabsHtml = `
       <button type="button" class="gallery-filter-btn active" data-filter="all" onclick="filterGallery('all', this)">
-        <i class="fas fa-th"></i> All Photos (${photos.length})
+        <i class="fas fa-th"></i> All Photos (${filteredPhotos.length})
       </button>
     `;
 
     categories.forEach(cat => {
       const catClass = sanitizeCategory(cat);
-      const count = photos.filter(p => (p.category || 'General') === cat).length;
+      const count = filteredPhotos.filter(p => (p.category || 'General') === cat).length;
       const icon = getCategoryIcon(cat);
 
       tabsHtml += `
@@ -270,7 +368,7 @@ function renderDriveGallery(photos) {
   }
 
   // 2. Render Google Drive image cards
-  const galleryCardsHtml = photos.map(photo => {
+  const galleryCardsHtml = filteredPhotos.map(photo => {
     const cat = photo.category || 'General';
     const catClass = sanitizeCategory(cat);
     
@@ -318,18 +416,12 @@ function getCategoryIcon(cat) {
 }
 
 function sanitizeCategory(cat) {
-  if (!cat) return 'general';
-  const clean = String(cat).toLowerCase();
-  if (clean.includes('campus') || clean.includes('infra')) return 'campus';
-  if (clean.includes('event') || clean.includes('celebrat') || clean.includes('jubilee')) return 'events';
-  if (clean.includes('art') || clean.includes('cultur') || clean.includes('kalotsavam')) return 'arts';
-  if (clean.includes('sport') || clean.includes('activit') || clean.includes('athlet') || clean.includes('yoga')) return 'sports';
-  if (clean.includes('academ') || clean.includes('class') || clean.includes('smart') || clean.includes('lab')) return 'academic';
-  return clean.replace(/[^a-z0-9]/g, '');
+  if (!cat) return 'cat-general';
+  return 'cat-' + String(cat).toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
 }
 
 /* ==========================================================================
-   6. Global Lightbox & Filter Helpers
+   7. Global Lightbox & Filter Helpers
    ========================================================================== */
 window.filterGallery = function(category, btn) {
   const buttons = document.querySelectorAll('.gallery-filter-btn');
@@ -375,7 +467,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ==========================================================================
-   7. Video Player Modal Logic (Global on window)
+   8. Video Player Modal Logic (Global on window)
    ========================================================================== */
 window.openVideoModal = function(videoId, title) {
   let modal = document.getElementById('videoPlayerModal');

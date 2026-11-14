@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tour hassounds="0" apprev="20986" start="node3" appversion="7.1.8">
+  <panorama id="node1">
+    <input leveltilesize="510" levelingpitch="0" levelbias="0.400" width="1944" height="1944" levelingroll="0" overlap="1" levelbiashidpi="1.000" leveltileurl="tiles/node1/cf_%c/l_%l/c_%x/tile_%y.jpg">
+      <level predecode="0" width="1944" height="1944" preload="0"/>
+      <level predecode="0" width="972" height="972" preload="0"/>
+      <level predecode="1" width="486" height="486" preload="1"/>
+      <preview color="0x808080" strip="1"/>
+    </input>
+    <view fovmode="2" pannorth="0">
+      <start projection="4" pan="97.9591" tilt="5.10606" fov="120"/>
+      <flyin projection="9" pan="0" tilt="-90" fov="170"/>
+      <min pan="0" fovpixel="2" tilt="-90"/>
+      <max fovfisheye="360" pan="360" scaletofit="1" tilt="90" fov="140" fovstereographic="330"/>
+    </view>
+    <userdata tags="N|turf" description="" source="" customnodeid="" longitude="" copyright="" latitude="" datetime="06-11-2026 11:02 AM" title="Cricket" heading="0" info="" nodeid="node1" author="" comment=""/>
+    <hotspots smoothmovement="0" width="180" wordwrap="1" height="20">
+      <label enabled="1" backgroundcolor="0xffffff" textcolor="0x000000" width="180" borderalpha="1" height="20" border="1" backgroundalpha="1" borderradius="1" wordwrap="1" textalpha="1" background="1" bordercolor="0x000000"/>
+      <polystyle backgroundalpha="0.25098" handcursor="1" backgroundcolor="0x0000ff" mode="0" borderalpha="1" bordercolor="0x0000ff"/>
+      <hotspot url="{node2}" target="" description="" pan="-0.18" skinid="ht_node" tilt="-5.2" id="Point01" title="FootBall"/>
+      <hotspot url="{node3}" target="" description="" pan="-67.12" skinid="ht_node" tilt="-1.3" id="Point02" title="Entrance"/>
+    </hotspots>
+    <media/>
+    <transition zoomin="0" enabled="1" zoomspeed="2" zoomoutpause="1" blendcolor="0x000000" delay="none" blendtime="1" zoomafterinfov="140" zoomfov="40" softedge="0" zoomout="0" type="crossdissolve" zoomafteroutfov="40"/>
+    <autorotate enabled="1" startloaded="0" speed="0.100" nodedelay="0.00" horizonfromdefview="0" noderandom="1" delay="3.00" returntohorizon="0.000" useanimation="0" nodefilter=""/>
+    <flyintransition enabled="1" speed="2.00"/>
+    <animation animsequence="Animation01" useinautorotation="0" syncanimationwithvideo="0" clipsrandom="0"/>
+    <control sensitivity="8" zoomcentercursor="1" simulatemass="1" lockedkeyboardzoom="0" contextvr="1" lockedwheel="0" contextprojections="0" invertcontrol="1" lockedmouse="0" rubberband="0" speedwheel="1" hideabout="0" lockedkeyboard="0" dblclickfullscreen="0" contextfullscreen="1" invertwheel="0"/>
+  </panorama>
+  <panorama id="node2">
+    <input leveltilesize="510" levelingpitch="0" levelbias="0.400" width="1944" height="1944" levelingroll="0" overlap="1" levelbiashidpi="1.000" leveltileurl="tiles/node2/cf_%c/l_%l/c_%x/tile_%y.jpg">
+      <level predecode="0" width="1944" height="1944" preload="0"/>
+      <level predecode="0" width="972" height="972" preload="0"/>
+      <level predecode="1" width="486" height="486" preload="1"/>
+      <preview color="0x808080" strip="1"/>
+    </input>
+    <view fovmode="2" pannorth="0">
+      <start projection="4" pan="154.291" tilt="2.92666" fov="120"/>
+      <flyin projection="9" pan="0" tilt="-90" fov="170"/>
+      <min pan="0" fovpixel="2" tilt="-90"/>
+      <max fovfisheye="360" pan="360" scaletofit="1" tilt="90" fov="140" fovstereographic="330"/>
+    </view>
+    <userdata tags="N|turf" description="" source="" customnodeid="" longitude="" copyright="" latitude="" datetime="06-11-2026 11:04 AM" title="FootBall" heading="0" info="" nodeid="node2" author="" comment=""/>
+    <hotspots smoothmovement="0" width="180" wordwrap="1" height="20">
+      <label enabled="1" backgroundcolor="0xffffff" textcolor="0x000000" width="180" borderalpha="1" height="20" border="1" backgroundalpha="1" borderradius="1" wordwrap="1" textalpha="1" background="1" bordercolor="0x000000"/>
+      <polystyle backgroundalpha="0.25098" handcursor="1" backgroundcolor="0x0000ff" mode="0" borderalpha="1" bordercolor="0x0000ff"/>
+      <hotspot url="{node1}" target="" description="" pan="-115.22" skinid="ht_node" tilt="-1.98" id="Point01" title="Cricket"/>
+      <hotspot url="{node3}" target="" description="" pan="-39.91" skinid="ht_node" tilt="-0.6" id="Point02" title="Entrance"/>
+    </hotspots>
+    <media/>
+    <transition zoomin="0" enabled="1" zoomspeed="2" zoomoutpause="1" blendcolor="0x000000" delay="none" blendtime="1" zoomafterinfov="140" zoomfov="40" softedge="0" zoomout="0" type="crossdissolve" zoomafteroutfov="40"/>
+    <autorotate enabled="1" startloaded="0" speed="0.100" nodedelay="0.00" horizonfromdefview="0" noderandom="1" delay="3.00" returntohorizon="0.000" useanimation="0" nodefilter=""/>
+    <flyintransition enabled="1" speed="2.00"/>
+    <animation animsequence="Animation01" useinautorotation="0" syncanimationwithvideo="0" clipsrandom="0"/>
+    <control sensitivity="8" zoomcentercursor="1" simulatemass="1" lockedkeyboardzoom="0" contextvr="1" lockedwheel="0" contextprojections="0" invertcontrol="1" lockedmouse="0" rubberband="0" speedwheel="1" hideabout="0" lockedkeyboard="0" dblclickfullscreen="0" contextfullscreen="1" invertwheel="0"/>
+  </panorama>
+  <panorama id="node3">
+    <input leveltilesize="510" levelingpitch="0" levelbias="0.400" width="1944" height="1944" levelingroll="0" overlap="1" levelbiashidpi="1.000" leveltileurl="tiles/node3/cf_%c/l_%l/c_%x/tile_%y.jpg">
+      <level predecode="0" width="1944" height="1944" preload="0"/>
+      <level predecode="0" width="972" height="972" preload="0"/>
+      <level predecode="1" width="486" height="486" preload="1"/>
+      <preview color="0x808080" strip="1"/>
+    </input>
+    <view fovmode="2" pannorth="0">
+      <start projection="4" pan="97.9591" tilt="5.10606" fov="120"/>
+      <flyin projection="9" pan="0" tilt="-90" fov="170"/>
+      <min pan="0" fovpixel="2" tilt="-90"/>
+      <max fovfisheye="360" pan="360" scaletofit="1" tilt="90" fov="140" fovstereographic="330"/>
+    </view>
+    <userdata tags="N|turf" description="" source="" customnodeid="" longitude="" copyright="" latitude="" datetime="06-11-2026 11:05 AM" title="Entrance" heading="0" info="" nodeid="node3" author="" comment=""/>
+    <hotspots smoothmovement="0" width="180" wordwrap="1" height="20">
+      <label enabled="1" backgroundcolor="0xffffff" textcolor="0x000000" width="180" borderalpha="1" height="20" border="1" backgroundalpha="1" borderradius="1" wordwrap="1" textalpha="1" background="1" bordercolor="0x000000"/>
+      <polystyle backgroundalpha="0.25098" handcursor="1" backgroundcolor="0x0000ff" mode="0" borderalpha="1" bordercolor="0x0000ff"/>
+      <hotspot url="{node1}" target="" description="" pan="-221.17" skinid="ht_node" tilt="-0.36" id="Point01" title="Cricket"/>
+      <hotspot url="{node2}" target="" description="" pan="-249.93" skinid="ht_node" tilt="-0.46" id="Point02" title="FootBall"/>
+    </hotspots>
+    <media/>
+    <transition zoomin="0" enabled="1" zoomspeed="2" zoomoutpause="1" blendcolor="0x000000" delay="none" blendtime="1" zoomafterinfov="140" zoomfov="40" softedge="0" zoomout="0" type="crossdissolve" zoomafteroutfov="40"/>
+    <autorotate enabled="1" startloaded="0" speed="0.100" nodedelay="0.00" horizonfromdefview="0" noderandom="1" delay="3.00" returntohorizon="0.000" useanimation="0" nodefilter=""/>
+    <flyintransition enabled="1" speed="2.00"/>
+    <animation animsequence="Animation01" useinautorotation="0" syncanimationwithvideo="0" clipsrandom="0"/>
+    <control sensitivity="8" zoomcentercursor="1" simulatemass="1" lockedkeyboardzoom="0" contextvr="1" lockedwheel="0" contextprojections="0" invertcontrol="1" lockedmouse="0" rubberband="0" speedwheel="1" hideabout="0" lockedkeyboard="0" dblclickfullscreen="0" contextfullscreen="1" invertwheel="0"/>
+  </panorama>
+  <masternode>
+    <userdata tags="" description="" copyright="" comment="" author="" title="Turf"/>
+    <animationsequences>
+      <sequence title="Animation01"/>
+    </animationsequences>
+  </masternode>
+</tour>

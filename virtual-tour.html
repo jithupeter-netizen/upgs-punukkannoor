@@ -4,20 +4,385 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>360° Virtual Campus Tour - UPGS Punukkonnoor | 100 Years of Excellence</title>
-  <meta name="description" content="Experience an immersive 360 degree virtual tour of UPGS Punukkonnoor school campus, classrooms, computer lab, and library.">
+  <meta name="description" content="Experience an immersive 360 degree virtual tour of UPGS Punukkonnoor: Main UP School, Lower Primary (LP) campus, and the School Sports Turf.">
   
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/virtual-tour.css">
+  <link rel="stylesheet" href="css/virtual-tour.css?v=2.2">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Pannellum & Three.js 3D Globe Library -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://images.unsplash.com">
+
+  <!-- Inline critical virtual tour styles (Guarantees zero cache mismatch) -->
+  <style id="virtual-tour-inline-styles">
+    .tour-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-bottom: 3rem;
+      width: 100%;
+    }
+    .tour-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px rgba(10, 25, 47, 0.06);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .tour-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(10, 25, 47, 0.12);
+      border-color: #cbd5e1;
+    }
+    .tour-card.active-card {
+      border: 2px solid var(--accent-coral, #ff4e31);
+      box-shadow: 0 10px 30px rgba(255, 78, 49, 0.18);
+    }
+    .tour-card-thumb {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background-color: #0b1120;
+      cursor: pointer;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    .tour-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tour-card:hover .tour-card-img {
+      transform: scale(1.08);
+    }
+    .tour-thumb-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(10, 25, 47, 0.15) 0%, rgba(10, 25, 47, 0.72) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+    .tour-card:hover .tour-thumb-overlay {
+      background: linear-gradient(180deg, rgba(10, 25, 47, 0.25) 0%, rgba(10, 25, 47, 0.85) 100%);
+    }
+    .tour-play-btn {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--primary-navy, #0a192f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, color 0.25s ease;
+    }
+    .tour-play-btn i {
+      margin-left: 3px;
+    }
+    .tour-card:hover .tour-play-btn {
+      transform: scale(1.14);
+      background: var(--accent-coral, #ff4e31);
+      color: #ffffff;
+    }
+    .tour-card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tour-nodes-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      background: rgba(10, 25, 47, 0.85);
+      color: #ffffff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .tour-card-body {
+      padding: 1.5rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .tour-card-title {
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: var(--primary-navy, #0a192f);
+      margin: 0 0 0.5rem 0;
+      line-height: 1.35;
+    }
+    .tour-card-desc {
+      font-size: 0.92rem;
+      color: #64748b;
+      line-height: 1.55;
+      margin: 0 0 1rem 0;
+    }
+    .tour-feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .tour-feature-list li {
+      font-size: 0.85rem;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      line-height: 1.4;
+    }
+    .tour-feature-list li i {
+      color: #059669;
+      font-size: 0.82rem;
+      flex-shrink: 0;
+    }
+    .tour-card-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 0.6rem;
+    }
+    .btn-tour-launch {
+      flex-grow: 1;
+      background: var(--primary-navy, #0a192f);
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+    }
+    .btn-tour-launch:hover {
+      background: var(--accent-coral, #ff4e31);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 78, 49, 0.35);
+    }
+    .btn-tour-fs {
+      background: #f1f5f9;
+      color: var(--primary-navy, #0a192f);
+      border: 1px solid #cbd5e1;
+      padding: 0.75rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-tour-fs:hover {
+      background: #e2e8f0;
+      color: var(--primary-navy, #0a192f);
+    }
+    .tour-stage-wrapper {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 15px 40px rgba(10, 25, 47, 0.08);
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .tour-stage-header {
+      padding: 1rem 1.5rem;
+      background: #0a192f;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 2px solid var(--accent-coral, #ff4e31);
+    }
+    .tour-stage-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .tour-stage-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0;
+      color: #ffffff;
+    }
+    .tour-switcher-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tour-switch-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    .tour-switch-btn:hover,
+    .tour-switch-btn.active {
+      background: var(--accent-coral, #ff4e31);
+      border-color: var(--accent-coral, #ff4e31);
+      color: #ffffff;
+    }
+    .virtual-tour-container {
+      width: 100%;
+      height: 650px;
+      position: relative;
+      background-color: #0b1120;
+    }
+    .virtual-tour-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .tour-fullscreen-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      z-index: 999999;
+      background: #000000;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .tour-fullscreen-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    .tour-fs-header {
+      height: 54px;
+      background: rgba(10, 25, 47, 0.98);
+      padding: 0 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+    .tour-fs-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .tour-fs-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .tour-fs-close {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background 0.2s ease, transform 0.2s ease;
+      font-family: inherit;
+    }
+    .tour-fs-close:hover {
+      background: #ef4444;
+      color: #ffffff;
+      transform: rotate(90deg);
+    }
+    .tour-fs-body {
+      flex-grow: 1;
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 54px);
+      background: #000000;
+    }
+    .tour-fs-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    @media (max-width: 1024px) {
+      .tour-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .tour-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .virtual-tour-container {
+        height: 450px;
+      }
+      .tour-stage-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tour-switcher-tabs {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -40,7 +405,7 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="brand-logo">
-        <img loading="lazy"  src="images/UPGS LOGO.svg" alt="UPGS Punukkonnoor" class="brand-logo-img">
+        <img loading="lazy" src="images/UPGS LOGO.svg" alt="UPGS Punukkonnoor" class="brand-logo-img">
         <div class="brand-text">
           <h1>UPGS Punukkonnoor</h1>
           <p>100 Years of Excellence</p>
@@ -74,31 +439,211 @@
   </nav>
 
   <!-- Page Header -->
-  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 5rem 0 4.5rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral);">
+  <section style="background: linear-gradient(135deg, #0a192f 0%, #0f172a 100%); color: #ffffff; padding: 4.5rem 0 4rem 0; text-align: center; border-bottom: 3px solid var(--accent-coral);">
     <div class="container">
       <span class="marquee-badge" style="background: var(--accent-coral); color: #ffffff; padding: 0.4rem 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
-        <i class="fas fa-vr-cardboard"></i> <span>INTERACTIVE 360° EXPERIENCE</span>
+        <i class="fas fa-vr-cardboard"></i> <span>INTERACTIVE 360° VIRTUAL CAMPUS</span>
       </span>
-      <h1 style="font-size: 3rem; font-weight: 800; color: #ffffff; margin-bottom: 1rem;">Take a 360° Virtual Campus Tour</h1>
-      <p style="color: #cbd5e1; font-size: 1.2rem; max-width: 750px; margin: 0 auto;">Explore our digital classrooms, library, playground, and centenary pavilion from anywhere in the world.</p>
+      <h1 style="font-size: 2.8rem; font-weight: 800; color: #ffffff; margin-bottom: 1rem; line-height: 1.2;">Explore UPGS Punukkonnoor in 360°</h1>
+      <p style="color: #cbd5e1; font-size: 1.15rem; max-width: 780px; margin: 0 auto; line-height: 1.6;">
+        Step inside our classrooms, computer lab, kindergarten courtyards, and sports turf. Click any campus section below to start exploring.
+      </p>
     </div>
   </section>
 
-  <!-- 360 Viewer Section -->
-  <section style="padding: 4rem 0; background-color: #f8fafc;">
+  <!-- Main Showcase Section -->
+  <section style="padding: 3.5rem 0 5rem 0; background-color: #f8fafc;">
     <div class="container">
-      <div style="margin-bottom: 1.75rem; text-align: center;">
-        <h2 style="font-size: 2rem; color: var(--primary-navy); margin-bottom: 0.4rem;">Interactive 360° Campus Viewer (UP Section)</h2>
-        <p style="color: #64748b; font-size: 1.05rem; max-width: 750px; margin: 0 auto;">Experience full 360° panoramic navigation, hotspots, and high-definition views of the UPGS Punukkonnoor Upper Primary (UP) campus.</p>
-      </div>
-
-      <div class="virtual-tour-container" style="height: 650px; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 40px rgba(10, 25, 47, 0.15); border: 2px solid #cbd5e1;">
-        <iframe src="360/UP/index.html" title="UPGS Punukkonnoor 360° Virtual Tour - Upper Primary" style="width: 100%; height: 100%; border: none;" allowfullscreen="true" allow="fullscreen; accelerometer; gyroscope; magnetometer"></iframe>
-      </div>
-
       
+      <!-- Section Title -->
+      <div style="margin-bottom: 2.5rem; text-align: center;">
+        <span style="color: var(--accent-coral); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.4rem;">
+          <i class="fas fa-compass"></i> Virtual Campus Gateways
+        </span>
+        <h2 style="font-size: 2.2rem; color: var(--primary-navy); margin-bottom: 0.5rem; font-weight: 800;">Choose a Campus Section</h2>
+        <p style="color: #64748b; font-size: 1.05rem; max-width: 650px; margin: 0 auto;">
+          High-definition 360° panoramas load on-demand for lightning-fast browsing and smooth mobile navigation.
+        </p>
+      </div>
+
+      <!-- 1. Three Preview Cards Grid -->
+      <div class="tour-cards-grid">
+        
+        <!-- Card 1: UP School (Main Academic Building) -->
+        <div class="tour-card active-card" id="card-UP">
+          <div class="tour-card-thumb" onclick="loadInPageTour('UP', true)">
+            <img src="360/UP/preview.jpg" alt="UPGS Main UP School Building 360 Virtual Tour" class="tour-card-img" loading="lazy">
+            <div class="tour-thumb-overlay">
+              <div class="tour-play-btn" title="Click to View Tour">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <span class="tour-card-badge" style="background: var(--gradient-blue, #2563eb);">
+              <i class="fas fa-university"></i> UP Section
+            </span>
+            <span class="tour-nodes-badge">
+              <i class="fas fa-street-view"></i> 8 360° Nodes
+            </span>
+          </div>
+          <div class="tour-card-body">
+            <h3 class="tour-card-title">Main UP School Building</h3>
+            <p class="tour-card-desc">Upper Primary campus featuring two-storey heritage block, digital smart classes, and laboratories.</p>
+            <ul class="tour-feature-list">
+              <li><i class="fas fa-check-circle"></i> Digital Smart Classrooms & Central Hall</li>
+              <li><i class="fas fa-check-circle"></i> Little Kites Hi-Tech IT Computer Lab</li>
+              <li><i class="fas fa-check-circle"></i> Centenary Library & Reading Room</li>
+            </ul>
+            <div class="tour-card-actions">
+              <button type="button" class="btn-tour-launch" onclick="loadInPageTour('UP', true)">
+                <i class="fas fa-play"></i> View in Page
+              </button>
+              <button type="button" class="btn-tour-fs" onclick="openFullscreenTour('UP')" title="Launch Fullscreen Tour">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: LP School & Kindergarten -->
+        <div class="tour-card" id="card-LP">
+          <div class="tour-card-thumb" onclick="loadInPageTour('LP', true)">
+            <img src="360/LP/preview.jpg" alt="UPGS LP School Campus 360 Virtual Tour" class="tour-card-img" loading="lazy">
+            <div class="tour-thumb-overlay">
+              <div class="tour-play-btn" title="Click to View Tour">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <span class="tour-card-badge" style="background: var(--gradient-coral, #ff4e31);">
+              <i class="fas fa-shapes"></i> LP & Pre-Primary
+            </span>
+            <span class="tour-nodes-badge">
+              <i class="fas fa-street-view"></i> Full Campus
+            </span>
+          </div>
+          <div class="tour-card-body">
+            <h3 class="tour-card-title">LP School & Kindergarten</h3>
+            <p class="tour-card-desc">Lower Primary classrooms, colorful kindergarten activity zones, and safe open play areas.</p>
+            <ul class="tour-feature-list">
+              <li><i class="fas fa-check-circle"></i> Safe & Vibrant Junior Classrooms</li>
+              <li><i class="fas fa-check-circle"></i> Pre-Primary Activity & Play Area</li>
+              <li><i class="fas fa-check-circle"></i> Open Courtyard & Verandas</li>
+            </ul>
+            <div class="tour-card-actions">
+              <button type="button" class="btn-tour-launch" onclick="loadInPageTour('LP', true)">
+                <i class="fas fa-play"></i> View in Page
+              </button>
+              <button type="button" class="btn-tour-fs" onclick="openFullscreenTour('LP')" title="Launch Fullscreen Tour">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Sports Turf & Athletic Ground -->
+        <div class="tour-card" id="card-Turf">
+          <div class="tour-card-thumb" onclick="loadInPageTour('Turf', true)">
+            <img src="360/Turf/preview.jpg" alt="UPGS Sports Turf & Athletic Ground 360 Tour" class="tour-card-img" loading="lazy">
+            <div class="tour-thumb-overlay">
+              <div class="tour-play-btn" title="Click to View Tour">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <span class="tour-card-badge" style="background: var(--gradient-emerald, #059669);">
+              <i class="fas fa-futbol"></i> Sports Arena
+            </span>
+            <span class="tour-nodes-badge">
+              <i class="fas fa-street-view"></i> Outdoor 360°
+            </span>
+          </div>
+          <div class="tour-card-body">
+            <h3 class="tour-card-title">School Sports Turf & Ground</h3>
+            <p class="tour-card-desc">All-weather green artificial turf football ground, athletic running area, and open recreation grounds.</p>
+            <ul class="tour-feature-list">
+              <li><i class="fas fa-check-circle"></i> Premium Artificial Green Football Turf</li>
+              <li><i class="fas fa-check-circle"></i> Open Athletic Ground & Pavilion</li>
+              <li><i class="fas fa-check-circle"></i> School Assembly & Sports Field</li>
+            </ul>
+            <div class="tour-card-actions">
+              <button type="button" class="btn-tour-launch" onclick="loadInPageTour('Turf', true)">
+                <i class="fas fa-play"></i> View in Page
+              </button>
+              <button type="button" class="btn-tour-fs" onclick="openFullscreenTour('Turf')" title="Launch Fullscreen Tour">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2. In-Page Interactive 360 Viewer Stage -->
+      <div class="tour-stage-wrapper" id="tourStageWrapper">
+        
+        <!-- Stage Control Bar -->
+        <div class="tour-stage-header">
+          <div class="tour-stage-title-wrap">
+            <span id="stageActiveBadge" style="background: var(--gradient-blue, #2563eb); color: #ffffff; padding: 0.35rem 0.8rem; font-size: 0.78rem; text-transform: uppercase; font-weight: 700; border-radius: 4px; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <i class="fas fa-university"></i> UP Section
+            </span>
+            <h3 id="stageActiveTitle" class="tour-stage-title">Main UP School Building (360° View)</h3>
+          </div>
+
+          <div class="tour-switcher-tabs">
+            <button type="button" class="tour-switch-btn active" id="tab-UP" onclick="loadInPageTour('UP', false)">
+              <i class="fas fa-university"></i> UP School
+            </button>
+            <button type="button" class="tour-switch-btn" id="tab-LP" onclick="loadInPageTour('LP', false)">
+              <i class="fas fa-shapes"></i> LP School
+            </button>
+            <button type="button" class="tour-switch-btn" id="tab-Turf" onclick="loadInPageTour('Turf', false)">
+              <i class="fas fa-futbol"></i> Sports Turf
+            </button>
+            <button type="button" class="tour-switch-btn" onclick="openCurrentInFullscreen()" style="background: var(--accent-coral, #ff4e31); border-color: var(--accent-coral, #ff4e31);" title="Open In Fullscreen">
+              <i class="fas fa-expand"></i> Fullscreen
+            </button>
+          </div>
+        </div>
+
+        <!-- 360 Viewport Container (Loaded on-demand, UP active by default) -->
+        <div class="virtual-tour-container" id="tourViewportContainer">
+          <iframe id="activeTourIframe" src="360/UP/index.html" title="UPGS Punukkonnoor 360° Virtual Tour" allowfullscreen="true" allow="fullscreen; accelerometer; gyroscope; magnetometer"></iframe>
+        </div>
+
+      </div>
+
     </div>
   </section>
+
+  <!-- 3. Full-Screen Immersive 360 Modal -->
+  <div class="tour-fullscreen-modal" id="tourFullscreenModal" role="dialog" aria-modal="true">
+    <div class="tour-fs-header">
+      <div class="tour-fs-title">
+        <i class="fas fa-vr-cardboard" style="color: var(--accent-coral);"></i>
+        <span id="fsModalTitle">UPGS Punukkonnoor 360° Virtual Tour</span>
+      </div>
+
+      <div class="tour-fs-actions">
+        <!-- Switcher inside fullscreen -->
+        <button type="button" class="tour-switch-btn active" id="fsTab-UP" onclick="switchFullscreenTour('UP')">
+          <i class="fas fa-university"></i> UP
+        </button>
+        <button type="button" class="tour-switch-btn" id="fsTab-LP" onclick="switchFullscreenTour('LP')">
+          <i class="fas fa-shapes"></i> LP
+        </button>
+        <button type="button" class="tour-switch-btn" id="fsTab-Turf" onclick="switchFullscreenTour('Turf')">
+          <i class="fas fa-futbol"></i> Turf
+        </button>
+        
+        <button type="button" class="tour-fs-close" onclick="closeFullscreenTour()" aria-label="Close Fullscreen Tour" title="Close (Esc)">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="tour-fs-body">
+      <iframe id="fullscreenTourIframe" src="" title="UPGS Fullscreen 360 Virtual Tour" allowfullscreen="true" allow="fullscreen; accelerometer; gyroscope; magnetometer"></iframe>
+    </div>
+  </div>
 
   <!-- Minimalist Site Footer -->
   <footer class="site-footer-minimal">
@@ -143,11 +688,160 @@
     </div>
   </footer>
 
-    <!-- 3D & 360 Tour Scripts (Deferred to eliminate render blocking) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js" defer></script>
+  <!-- 360 Tour Controller Script -->
+  <script>
+    const TOURS = {
+      UP: {
+        title: "Main UP School Building (360° View)",
+        badgeText: "UP Section",
+        badgeIcon: "fas fa-university",
+        badgeGradient: "var(--gradient-blue, #2563eb)",
+        src: "360/UP/index.html",
+        preview: "360/UP/preview.jpg"
+      },
+      LP: {
+        title: "LP School & Kindergarten (360° View)",
+        badgeText: "LP & Pre-Primary",
+        badgeIcon: "fas fa-shapes",
+        badgeGradient: "var(--gradient-coral, #ff4e31)",
+        src: "360/LP/index.html",
+        preview: "360/LP/preview.jpg"
+      },
+      Turf: {
+        title: "School Sports Turf & Ground (360° View)",
+        badgeText: "Sports Arena",
+        badgeIcon: "fas fa-futbol",
+        badgeGradient: "var(--gradient-emerald, #059669)",
+        src: "360/Turf/index.html",
+        preview: "360/Turf/preview.jpg"
+      }
+    };
+
+    let currentActiveTourKey = 'UP';
+
+    /**
+     * Loads or switches a tour in the main in-page viewport stage
+     * @param {string} key - 'UP', 'LP', or 'Turf'
+     * @param {boolean} autoScroll - whether to smoothly scroll down to viewer
+     */
+    function loadInPageTour(key, autoScroll = false) {
+      if (!TOURS[key]) return;
+      currentActiveTourKey = key;
+
+      const tour = TOURS[key];
+      const iframe = document.getElementById('activeTourIframe');
+      const titleElem = document.getElementById('stageActiveTitle');
+      const badgeElem = document.getElementById('stageActiveBadge');
+
+      // 1. Update text & badges
+      if (titleElem) titleElem.textContent = tour.title;
+      if (badgeElem) {
+        badgeElem.innerHTML = `<i class="${tour.badgeIcon}"></i> ${tour.badgeText}`;
+        badgeElem.style.background = tour.badgeGradient;
+      }
+
+      // 2. Update active switcher tabs
+      document.querySelectorAll('.tour-switch-btn').forEach(btn => btn.classList.remove('active'));
+      const activeTab = document.getElementById('tab-' + key);
+      if (activeTab) activeTab.classList.add('active');
+
+      // 3. Highlight card
+      document.querySelectorAll('.tour-card').forEach(c => c.classList.remove('active-card'));
+      const activeCard = document.getElementById('card-' + key);
+      if (activeCard) activeCard.classList.add('active-card');
+
+      // 4. Update iframe src safely if different
+      if (iframe) {
+        if (!iframe.src.endsWith(tour.src)) {
+          iframe.src = tour.src;
+        }
+      }
+
+      // 5. Smooth scroll if requested
+      if (autoScroll) {
+        const stageWrap = document.getElementById('tourStageWrapper');
+        if (stageWrap) {
+          const yOffset = -70;
+          const y = stageWrap.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    }
+
+    /**
+     * Launches the full-screen immersive modal
+     * @param {string} key - 'UP', 'LP', or 'Turf'
+     */
+    function openFullscreenTour(key) {
+      if (!TOURS[key]) return;
+      currentActiveTourKey = key;
+
+      const tour = TOURS[key];
+      const modal = document.getElementById('tourFullscreenModal');
+      const fsIframe = document.getElementById('fullscreenTourIframe');
+      const fsTitle = document.getElementById('fsModalTitle');
+
+      if (fsTitle) fsTitle.innerHTML = `<i class="${tour.badgeIcon}" style="color: var(--accent-coral);"></i> UPGS 360° • ${tour.title}`;
+
+      // Update switcher active state in fullscreen
+      ['UP', 'LP', 'Turf'].forEach(k => {
+        const tab = document.getElementById('fsTab-' + k);
+        if (tab) tab.classList.toggle('active', k === key);
+      });
+
+      if (fsIframe) {
+        fsIframe.src = tour.src;
+      }
+
+      if (modal) {
+        modal.style.display = 'flex';
+        setTimeout(() => modal.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    /**
+     * Switches tour inside the fullscreen modal
+     */
+    function switchFullscreenTour(key) {
+      openFullscreenTour(key);
+      // Also sync the in-page stage in the background
+      loadInPageTour(key, false);
+    }
+
+    /**
+     * Closes the fullscreen modal and unloads the heavy iframe
+     */
+    function closeFullscreenTour() {
+      const modal = document.getElementById('tourFullscreenModal');
+      const fsIframe = document.getElementById('fullscreenTourIframe');
+
+      if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+          modal.style.display = 'none';
+          if (fsIframe) fsIframe.src = ''; // Releases WebGL memory
+        }, 250);
+        document.body.style.overflow = '';
+      }
+    }
+
+    /**
+     * Opens whatever tour is currently selected in fullscreen
+     */
+    function openCurrentInFullscreen() {
+      openFullscreenTour(currentActiveTourKey);
+    }
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeFullscreenTour();
+      }
+    });
+  </script>
+
   <script type="module" src="js/main.js"></script>
-  <script type="module" src="js/360-viewer.js"></script>
   <script type="module" src="js/centenary-hub.js"></script>
 </body>
 </html>

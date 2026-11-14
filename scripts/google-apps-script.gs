@@ -18,8 +18,11 @@ const SCHOOL_CONFIG = {
   SCHOOL_NAME: "UPGS Punukkonnoor",
   ALUMNI_SHEET_NAME: "UPGS_Centenary_Alumni_Directory",
   
-  // 👉 Target Gallery Google Drive Folder ID (inside gallery/pics):
+  // 👉 Target Gallery Google Drive Folder ID:
   GALLERY_FOLDER_ID: "1KPmJMR-dLNFNv80TxEWNg7t3ASeyCWL9",
+
+  // 👉 Target Homepage Hero Slider Google Drive Folder ID:
+  SLIDES_FOLDER_ID: "1kJhNCJ-GVv5TOXH63hJ3uknuF05y6u9P",
 
   // 👉 Optional Master Spreadsheet ID for dynamic settings/announcements:
   WEBLINKS_SPREADSHEET_ID: "17zAd71MkOwgoReEvjYQtsFMEHiJ6T-fQOHPqPXOqMII"
@@ -50,7 +53,14 @@ function doGet(e) {
 
     // 1. Scan Google Drive Gallery Photos & Subfolder Categories
     if (type === "gallery" || type === "all") {
-      responseData.gallery = getDriveGallery();
+      const allPhotos = getDriveGallery();
+      const isSlide = p => /^(slide|slides|hero|banner|banners)$/i.test((p.category || '').trim());
+      responseData.gallery = allPhotos.filter(p => !isSlide(p));
+    }
+
+    // 2. Scan Google Drive Homepage Hero Slider Photos
+    if (type === "slides" || type === "all") {
+      responseData.slides = getDriveSlides();
     }
 
     // 2. Settings (Marquee announcement, leadership messages)
@@ -72,7 +82,9 @@ function doGet(e) {
       status: "success",
       school: SCHOOL_CONFIG.SCHOOL_NAME,
       folderId: SCHOOL_CONFIG.GALLERY_FOLDER_ID,
-      count: responseData.gallery ? responseData.gallery.length : 0,
+      slidesFolderId: SCHOOL_CONFIG.SLIDES_FOLDER_ID,
+      galleryCount: responseData.gallery ? responseData.gallery.length : 0,
+      slidesCount: responseData.slides ? responseData.slides.length : 0,
       timestamp: new Date().toISOString(),
       data: responseData
     };
@@ -105,6 +117,22 @@ function getDriveGallery() {
     Logger.log("Gallery scan error: " + e.toString());
   }
   return gallery;
+}
+
+/**
+ * Scans Google Drive Hero Slide Folder for Homepage Slider Images
+ */
+function getDriveSlides() {
+  const slides = [];
+  try {
+    if (SCHOOL_CONFIG.SLIDES_FOLDER_ID) {
+      const slideFolder = DriveApp.getFolderById(SCHOOL_CONFIG.SLIDES_FOLDER_ID);
+      scanFolderRecursively(slideFolder, "Slide", slides, 0);
+    }
+  } catch (e) {
+    Logger.log("Slides scan error: " + e.toString());
+  }
+  return slides;
 }
 
 /**
@@ -145,9 +173,13 @@ function scanFolderRecursively(folder, currentCategory, galleryArray, depth) {
       const subfolder = subfolders.next();
       const subName = subfolder.getName().trim();
 
-      // If subfolder is a generic container like "Pics" or "Gallery", inherit parent category, else use folder name as Category!
-      const isGenericContainer = /^(gallery|galery|pics|pictures|photo|photos|web-admin)$/i.test(subName);
-      const nextCategory = (isGenericContainer && currentCategory !== "General") ? currentCategory : subName;
+      // If subfolder is Slide (or inside Slide), keep "Slide" category for Homepage Hero Slider!
+      let nextCategory = subName;
+      if (currentCategory === "Slide" || /^(slide|slides|hero|banner|banners)$/i.test(subName)) {
+        nextCategory = "Slide";
+      } else if (/^(gallery|galery|pics|pictures|photo|photos|web-admin)$/i.test(subName)) {
+        nextCategory = (currentCategory !== "General") ? currentCategory : "General";
+      }
 
       scanFolderRecursively(subfolder, nextCategory, galleryArray, depth + 1);
     }
@@ -350,11 +382,21 @@ function handleAlumniForm(data) {
  */
 function testScanGallery() {
   const root = DriveApp.getFolderById(SCHOOL_CONFIG.GALLERY_FOLDER_ID);
-  Logger.log("📁 Scanning Root Folder: " + root.getName() + " (" + root.getId() + ")");
-  const photos = getDriveGallery();
-  Logger.log("📸 TOTAL PHOTOS DETECTED: " + photos.length);
-  for (let i = 0; i < photos.length; i++) {
-    Logger.log((i + 1) + ". [" + photos[i].category + "] " + photos[i].title + " -> " + photos[i].thumbnailUrl);
+  Logger.log("📁 Scanning Gallery Folder: " + root.getName() + " (" + root.getId() + ")");
+  const gallery = getDriveGallery();
+  Logger.log("📸 TOTAL GALLERY PHOTOS: " + gallery.length);
+  for (let i = 0; i < gallery.length; i++) {
+    Logger.log("   [Gallery] " + (i + 1) + ". [" + gallery[i].category + "] " + gallery[i].title);
+  }
+
+  if (SCHOOL_CONFIG.SLIDES_FOLDER_ID) {
+    const slideFolder = DriveApp.getFolderById(SCHOOL_CONFIG.SLIDES_FOLDER_ID);
+    Logger.log("📁 Scanning Hero Slides Folder: " + slideFolder.getName() + " (" + slideFolder.getId() + ")");
+    const slides = getDriveSlides();
+    Logger.log("🎬 TOTAL HERO SLIDES: " + slides.length);
+    for (let j = 0; j < slides.length; j++) {
+      Logger.log("   [Slide] " + (j + 1) + ". " + slides[j].title + " -> " + slides[j].fullUrl);
+    }
   }
 }
 

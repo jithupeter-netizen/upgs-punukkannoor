@@ -23,7 +23,11 @@ export default defineConfig({
       name: 'copy-360-assets',
       closeBundle() {
         if (fs.existsSync('360')) {
-          fs.cpSync('360', 'dist/360', { recursive: true });
+          try {
+            fs.cpSync('360', 'dist/360', { recursive: true, force: true });
+          } catch (e) {
+            console.warn('360 assets copy notice (files already present):', e.message);
+          }
         }
       }
     }
