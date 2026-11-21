@@ -67,14 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 2. Active Link Highlighting
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.nav-item-link, .nav-link');
+  const cleanCurrent = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
+  const navLinks = document.querySelectorAll('.nav-item-link, .nav-link, .nav-cta-btn');
 
   navLinks.forEach((link) => {
-    const href = link.getAttribute('href');
-    if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+    const rawHref = link.getAttribute('href');
+    if (!rawHref || rawHref.startsWith('http') || rawHref.includes('#')) return;
+    const cleanHref = rawHref.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
+    if (cleanHref === cleanCurrent || (cleanCurrent === '' && (cleanHref === '' || cleanHref === 'index'))) {
       link.classList.add('active');
-    } else if (href && !href.includes('#')) {
+    } else {
       link.classList.remove('active');
     }
   });

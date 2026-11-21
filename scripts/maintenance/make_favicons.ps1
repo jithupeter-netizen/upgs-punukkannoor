@@ -79,3 +79,4 @@ Copy-Item "c:\Antigravity\web\UPGS punukkannoor\images\UPGS LOGO.svg" "c:\Antigr
 Copy-Item "c:\Antigravity\web\UPGS punukkannoor\public\apple-touch-icon.png" "c:\Antigravity\web\UPGS punukkannoor\apple-touch-icon.png" -Force
 
 Write-Output "All favicon files prepared!"
+
